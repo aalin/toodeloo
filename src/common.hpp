@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stack>
 #include <stdexcept>
+#include <string>
+#include <vector>
 
 #include <boost/shared_ptr.hpp>
 
@@ -17,6 +19,11 @@
 #include <GL/glext.h>
 #include <GL/glu.h>
 #endif
+
+#include <chipmunk/chipmunk.h>
+#include "chipmunk.hpp"
+
+#include "map.hpp"
 
 #include "engine.hpp"
 #include "abstract_state.hpp"

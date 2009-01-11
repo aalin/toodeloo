@@ -1,4 +1,4 @@
-project(worldzor)
+project(game)
 
 find_package(SDL)
 find_package(SDL_image)
@@ -20,10 +20,10 @@ endif(NOT OPENGL_FOUND)
 include_directories(${OPENGL_INCLUDE_DIR} ${SDL_INCLUDE_DIR} ${SDLIMAGE_INCLUDE_DIR})
 
 set(SHARED_SOURCES 
-	main
 	abstract_state
 	play_state
 	engine
+	chipmunk
 )
 
 set(MAIN_SOURCES main ${SHARED_SOURCES})
@@ -31,8 +31,8 @@ if(APPLE)
 	set(MAIN_SOURCES ${MAIN_SOURCES} sdl/SDLMain.m)
 endif(APPLE)
 
-add_executable(worldzor ${MAIN_SOURCES})
+add_executable(game ${MAIN_SOURCES})
 #add_executable(testzor test ${SHARED_SOURCES})
-target_link_libraries(worldzor ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${SDLIMAGE_LIBRARY})
+target_link_libraries(game ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${SDLIMAGE_LIBRARY} chipmunk)
 #target_link_libraries(testzor ${SDL_LIBRARY} ${OPENGL_LIBRARIES})
 #add_test(Test testzor)

@@ -68,11 +68,6 @@ Engine::initGL()
 	glHint(GL_POINT_SMOOTH_HINT, GL_DONT_CARE);
 	glLineWidth(2.5f);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-320.0, 320.0, -240.0, 240.0, -1.0, 1.0);
-	glTranslatef(0.5, 0.5, 0.0);
-
 	glEnable(GL_TEXTURE_2D);
 }
 
@@ -131,12 +126,14 @@ Engine::handleInput()
 void
 Engine::update()
 {
+	/*
 	while(GLenum error = glGetError())
 	{
 		if(error == GL_NO_ERROR)
 			break;
 		//std::cerr << glGetError() << std::endl;
 	}
+	*/
 
 	if(_states.empty())
 		throw std::runtime_error("No states.");
