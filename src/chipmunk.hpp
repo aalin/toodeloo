@@ -3,6 +3,7 @@
 
 namespace Chipmunk {
 	typedef cpVect Vector2;
+	class Shape;
 
 	class Space
 	{
@@ -12,6 +13,10 @@ namespace Chipmunk {
 
 			Vector2 gravity() const;
 			Space& gravity(Vector2 v);
+
+			Space& addStaticShape(Shape&);
+
+			cpSpace* space() { return _space; }
 
 		private:
 			cpSpace* _space;
@@ -25,7 +30,7 @@ namespace Chipmunk {
 			Body(float m, float i);
 			~Body();
 
-			cpBody* chipmunkBody() { return _body; };
+			cpBody* body() { return _body; }
 			
 			float mass() const;
 			float moment() const;
@@ -84,8 +89,7 @@ namespace Chipmunk {
 				static Shape polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset);
 				static Shape segment(Body& body, Vector2 a, Vector2 b, float radius);
 
-			private:
-				boost::shared_ptr<ShapeWrapper> _shape_wrapper;
+				boost::shared_ptr<ShapeWrapper> shape_wrapper;
 	};
 }
 

@@ -29,6 +29,7 @@ namespace Chipmunk {
 		return *this;
 	}
 
+
 // Body
 
 	Body::Body(float m, float i)
@@ -99,30 +100,30 @@ namespace Chipmunk {
 // Shape
 
 	Shape::Shape(boost::shared_ptr<ShapeWrapper> shape_wrapper)
-		: _shape_wrapper(shape_wrapper)
+		: shape_wrapper(shape_wrapper)
 	{
 	}
 
 	Shape::Shape(cpShape* shape)
 	{
-		_shape_wrapper.reset(new ShapeWrapper(shape));
+		shape_wrapper.reset(new ShapeWrapper(shape));
 	}
 
 	Shape
 	Shape::circle(Body& body, float radius, Vector2 offset)
 	{
-		return Shape(cpCircleShapeNew(body.chipmunkBody(), radius, offset));
+		return Shape(cpCircleShapeNew(body.body(), radius, offset));
 	}
 
 	Shape
 	Shape::polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset)
 	{
-		return Shape(cpPolyShapeNew(body.chipmunkBody(), vertices.size(), &vertices[0], offset));
+		return Shape(cpPolyShapeNew(body.body(), vertices.size(), &vertices[0], offset));
 	}
 
 	Shape
 	Shape::segment(Body& body, Vector2 a, Vector2 b, float radius)
 	{
-		return Shape(cpSegmentShapeNew(body.chipmunkBody(), a, b, radius));
+		return Shape(cpSegmentShapeNew(body.body(), a, b, radius));
 	}
 }
