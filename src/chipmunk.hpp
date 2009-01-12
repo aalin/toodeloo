@@ -4,6 +4,7 @@
 namespace Chipmunk {
 	typedef cpVect Vector2;
 	class Shape;
+	class Body;
 
 	class Space
 	{
@@ -15,11 +16,12 @@ namespace Chipmunk {
 			Space& gravity(Vector2 v);
 
 			Space& addStaticShape(Shape&);
+			Space& addBody(Body&);
 
-			cpSpace* space() { return _space; }
-
+			cpSpace* p() { return _p; }
+			
 		private:
-			cpSpace* _space;
+			cpSpace* _p;
 	};
 
 	class Shape;
@@ -30,8 +32,6 @@ namespace Chipmunk {
 			Body(float m, float i);
 			~Body();
 
-			cpBody* body() { return _body; }
-			
 			float mass() const;
 			float moment() const;
 			Vector2 rotation() const;
@@ -58,38 +58,26 @@ namespace Chipmunk {
 			// This function will eventually be replaced by a new constraint (joint) type.
 			Body& dampedSpring(Body& other, Vector2 anchr1, Vector2 anchr2, float rlen, float k, float dmp, float dt);
 
+			cpBody* p() { return _p; };
+
 		private:
-			cpBody* _body;
+			cpBody* _p;
 			std::vector<Shape> _shapes;
 	};
 
-		class Shape
-		{
-			public:
-				struct ShapeWrapper
-				{
-					ShapeWrapper(cpShape* shape)
-					{
-						p = shape;
-					};
-					
-					~ShapeWrapper()
-					{
-					cpShapeDestroy(p);
-					cpShapeFree(p);
-					}
+	class Shape
+	{
+		public:
+			Shape(cpShape* shape);
 
-					cpShape* p;
-				};
+			static Shape circle(Body& body, float radius, Vector2 offset);
+			static Shape polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset);
+			static Shape segment(Body& body, Vector2 a, Vector2 b, float radius);
 
-				Shape(boost::shared_ptr<ShapeWrapper> shape_wrapper);
-				Shape(cpShape* shape);
+			cpShape* p() { return _p; };
 
-				static Shape circle(Body& body, float radius, Vector2 offset);
-				static Shape polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset);
-				static Shape segment(Body& body, Vector2 a, Vector2 b, float radius);
-
-				boost::shared_ptr<ShapeWrapper> shape_wrapper;
+		private:
+			cpShape* _p;
 	};
 }
 

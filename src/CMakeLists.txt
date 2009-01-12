@@ -19,6 +19,8 @@ endif(NOT OPENGL_FOUND)
 
 include_directories(${OPENGL_INCLUDE_DIR} ${SDL_INCLUDE_DIR} ${SDLIMAGE_INCLUDE_DIR})
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb")
+
 set(SHARED_SOURCES 
 	abstract_state
 	play_state

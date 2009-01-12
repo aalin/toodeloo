@@ -3,7 +3,10 @@
 
 class Map
 {
-	Map(std::string filename);
+	public:
+		Map(std::string filename);
+	private:
+		Chipmunk::Body _body;
 };
 
 #endif
