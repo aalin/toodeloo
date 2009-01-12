@@ -50,7 +50,9 @@ namespace Chipmunk {
 			Body& resetForces();
 			Body& applyForce(Vector2, Vector2);
 
-			Body& addShape(Shape shape);
+			Shape& shapeCircle(float radius, Vector2 offset);
+			Shape& shapePolygon(std::vector<Vector2> vertices, Vector2 offset);
+			Shape& shapeSegment(Vector2 a, Vector2 b, float radius);
 
 			// Apply a spring force between this and another body at anchors anchr1 and anchr2
 			// respectively. k is the spring constant (Young's modulus), rlen is the

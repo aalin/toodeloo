@@ -110,6 +110,27 @@ namespace Chipmunk {
 		return *this;
 	}
 
+	Shape&
+	Body::shapeCircle(float radius, Vector2 offset)
+	{
+		_shapes.push_back(Shape::circle(*this, radius, offset));
+		return _shapes[_shapes.size() - 1];
+	}
+
+	Shape&
+	Body::shapePolygon(std::vector<Vector2> vertices, Vector2 offset)
+	{
+		_shapes.push_back(Shape::polygon(*this, vertices, offset));
+		return _shapes[_shapes.size() - 1];
+	}
+
+	Shape&
+	Body::shapeSegment(Vector2 a, Vector2 b, float radius)
+	{
+		_shapes.push_back(Shape::segment(*this, a, b, radius));
+		return _shapes[_shapes.size() - 1];
+	}
+
 // Shape
 
 	Shape::Shape(cpShape* shape)
