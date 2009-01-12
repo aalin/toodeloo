@@ -4,7 +4,6 @@ PlayState::PlayState(Engine& engine)
 	: AbstractState(engine)
 {
 	_space.gravity(cpv(0, -100));
-
 }
 
 void

@@ -35,10 +35,12 @@ namespace Chipmunk {
 			float mass() const;
 			float moment() const;
 			Vector2 rotation() const;
+			Vector2 position() const;
 
 			Body& mass(float);
 			Body& moment(float);
 			Body& angle(float);
+			Body& position(Vector2);
 
 			Body& slew(Vector2 pos, float dt);
 			Body& updateVelocity(Vector2 gravity, float damping, float dt);
@@ -75,6 +77,12 @@ namespace Chipmunk {
 			static Shape segment(Body& body, Vector2 a, Vector2 b, float radius);
 
 			cpShape* p() { return _p; };
+
+			float elasticity() const;
+			float friction() const;
+
+			Shape& elasticity(float e);
+			Shape& friction(float u);
 
 		private:
 			cpShape* _p;

@@ -8,6 +8,7 @@ class PlayState : public AbstractState
 		void update();
 		void draw();
 		void handleInput(const SDL_Event&);
+		Chipmunk::Space& space() { return _space; };
 	private:
 		Chipmunk::Space _space;
 };

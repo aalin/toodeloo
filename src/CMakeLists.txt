@@ -26,6 +26,7 @@ set(SHARED_SOURCES
 	play_state
 	engine
 	chipmunk
+	player
 )
 
 set(MAIN_SOURCES main ${SHARED_SOURCES})

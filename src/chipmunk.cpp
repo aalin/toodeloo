@@ -57,10 +57,12 @@ namespace Chipmunk {
 	float Body::mass() const { return _p->m; }
 	float Body::moment() const { return _p->i; }
 	Vector2 Body::rotation() const { return _p->rot; }
+	Vector2 Body::position() const { return _p->p; }
 
 	Body& Body::mass(float m) { cpBodySetMass(_p, m); return *this; }
 	Body& Body::moment(float i) { cpBodySetMoment(_p, i); return *this; }
 	Body& Body::angle(float a) { cpBodySetAngle(_p, a); return *this; }
+	Body& Body::position(Vector2 p) { _p->p = p; return *this; }
 
 	Body&
 	Body::slew(Vector2 pos, float dt)
@@ -132,4 +134,11 @@ namespace Chipmunk {
 	{
 		return Shape(cpSegmentShapeNew(body.p(), a, b, radius));
 	}
+
+	float Shape::elasticity() const { return _p->e; }
+
+	float Shape::friction() const { return _p->u; }
+
+	Shape& Shape::elasticity(float e) { _p->e = e; return *this; }
+	Shape& Shape::friction(float u) { _p->u = u; return *this; }
 }
