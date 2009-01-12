@@ -1,7 +1,7 @@
 #include "common.hpp"
 
 PlayState::PlayState(Engine& engine)
-	: AbstractState(engine)
+	: AbstractState(engine), _player(Player(*this))
 {
 	_space.gravity(cpv(0, -100));
 }
@@ -10,6 +10,7 @@ void
 PlayState::update()
 {
 	Uint8* keys = SDL_GetKeyState(NULL);
+	_player.update();
 }
 
 void
@@ -36,5 +37,6 @@ PlayState::draw()
 	glTranslatef(0.5, 0.5, 0.0);
 
 	glMatrixMode(GL_MODELVIEW);
+	_player.draw();
 }
 

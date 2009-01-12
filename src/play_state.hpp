@@ -1,6 +1,8 @@
 #ifndef PLAY_STATE_HPP
 #define PLAY_STATE_HPP
 
+class Player;
+
 class PlayState : public AbstractState
 {
 	public:
@@ -11,6 +13,7 @@ class PlayState : public AbstractState
 		Chipmunk::Space& space() { return _space; };
 	private:
 		Chipmunk::Space _space;
+		Player _player;
 };
 
 #endif

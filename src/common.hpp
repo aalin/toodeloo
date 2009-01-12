@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
 
 #include <SDL/SDL.h>
@@ -28,5 +29,5 @@
 
 #include "engine.hpp"
 #include "abstract_state.hpp"
-#include "play_state.hpp"
 #include "player.hpp"
+#include "play_state.hpp"

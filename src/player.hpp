@@ -1,6 +1,8 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+class PlayState;
+
 class Player
 {
 	public:
