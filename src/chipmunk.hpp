@@ -15,6 +15,8 @@ namespace Chipmunk {
 			Vector2 gravity() const;
 			Space& gravity(Vector2 v);
 
+			void update();
+
 			Space& addStaticShape(Shape&);
 			Space& addBody(Body&);
 

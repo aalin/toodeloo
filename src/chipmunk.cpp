@@ -29,6 +29,13 @@ namespace Chipmunk {
 		return *this;
 	}
 
+	void
+	Space::update()
+	{
+		for(int i = 0; i < 2; i++)
+			cpSpaceStep(_p, 1.0 / 60.0 / 2);
+	}
+
 	Space&
 	Space::addStaticShape(Shape& shape)
 	{

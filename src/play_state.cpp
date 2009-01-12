@@ -11,6 +11,8 @@ PlayState::update()
 {
 	Uint8* keys = SDL_GetKeyState(NULL);
 	_player.update();
+
+	_space.update();
 }
 
 void
