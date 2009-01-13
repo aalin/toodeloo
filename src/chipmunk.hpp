@@ -3,8 +3,12 @@
 
 namespace Chipmunk {
 	typedef cpVect Vector2;
-	class Shape;
 	class Body;
+
+	namespace Shapes
+	{
+		class Shape;
+	}
 
 	class Space
 	{
@@ -17,7 +21,7 @@ namespace Chipmunk {
 
 			void update();
 
-			Space& addStaticShape(Shape&);
+			Space& addStaticShape(Shapes::Shape*);
 			Space& addBody(Body&);
 
 			cpSpace* p() { return _p; }
@@ -25,8 +29,6 @@ namespace Chipmunk {
 		private:
 			cpSpace* _p;
 	};
-
-	class Shape;
 
 	class Body
 	{
@@ -38,11 +40,15 @@ namespace Chipmunk {
 			float moment() const;
 			Vector2 rotation() const;
 			Vector2 position() const;
+			Vector2 velocity() const;
+			Vector2 force() const;
 
 			Body& mass(float);
 			Body& moment(float);
 			Body& angle(float);
 			Body& position(Vector2);
+			Body& velocity(Vector2);
+			Body& force(Vector2);
 
 			Body& slew(Vector2 pos, float dt);
 			Body& updateVelocity(Vector2 gravity, float damping, float dt);
@@ -52,9 +58,7 @@ namespace Chipmunk {
 			Body& resetForces();
 			Body& applyForce(Vector2, Vector2);
 
-			Shape& shapeCircle(float radius, Vector2 offset);
-			Shape& shapePolygon(std::vector<Vector2> vertices, Vector2 offset);
-			Shape& shapeSegment(Vector2 a, Vector2 b, float radius);
+			void addShape(Shapes::Shape*);
 
 			// Apply a spring force between this and another body at anchors anchr1 and anchr2
 			// respectively. k is the spring constant (Young's modulus), rlen is the
@@ -68,29 +72,50 @@ namespace Chipmunk {
 
 		private:
 			cpBody* _p;
-			std::vector<Shape> _shapes;
+			std::vector<Shapes::Shape*> _shapes;
 	};
 
-	class Shape
+	namespace Shapes
 	{
-		public:
-			Shape(cpShape* shape);
+		class Shape
+		{
+			public:
+				~Shape();
 
-			static Shape circle(Body& body, float radius, Vector2 offset);
-			static Shape polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset);
-			static Shape segment(Body& body, Vector2 a, Vector2 b, float radius);
+				cpShape* p() { return _p; };
+				
+				bool isInitialized();
 
-			cpShape* p() { return _p; };
+				float elasticity() const;
+				float friction() const;
 
-			float elasticity() const;
-			float friction() const;
+				// TODO: virtual void draw() = 0;
 
-			Shape& elasticity(float e);
-			Shape& friction(float u);
+				Shape& elasticity(float e);
+				Shape& friction(float u);
 
-		private:
-			cpShape* _p;
-	};
+			protected:
+				cpShape* _p;
+		};
+
+		class Circle : public Shape
+		{
+			public:
+				Circle(Body& body, float radius, Vector2 offset);
+		};
+
+		class Polygon : public Shape
+		{
+			public:
+				Polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset);
+		};
+
+		class Segment : public Shape
+		{
+			public:
+				Segment(Body& body, Vector2 a, Vector2 b, float radius);
+		};
+	}
 }
 
 #endif

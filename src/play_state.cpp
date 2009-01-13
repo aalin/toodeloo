@@ -22,7 +22,14 @@ PlayState::handleInput(const SDL_Event& event)
 	{
 		switch(event.key.keysym.sym)
 		{
-			case SDLK_F1:
+			case SDLK_LEFT:
+				_player.goLeft();
+				break;
+			case SDLK_RIGHT:
+				_player.goRight();
+				break;
+			case SDLK_UP:
+				_player.jump();
 				break;
 			default:
 				break;

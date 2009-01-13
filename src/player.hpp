@@ -12,6 +12,10 @@ class Player
 		void update();
 		void draw();
 
+		void goLeft();
+		void goRight();
+		void jump();
+
 	private:
 		Chipmunk::Body _body;
 		std::vector<Chipmunk::Vector2> _vertices;

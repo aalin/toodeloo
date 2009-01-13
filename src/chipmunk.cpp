@@ -37,9 +37,9 @@ namespace Chipmunk {
 	}
 
 	Space&
-	Space::addStaticShape(Shape& shape)
+	Space::addStaticShape(Shapes::Shape* shape)
 	{
-		cpSpaceAddStaticShape(_p, shape.p());
+		cpSpaceAddStaticShape(_p, shape->p());
 	}
 
 	Space&
@@ -57,7 +57,11 @@ namespace Chipmunk {
 
 	Body::~Body()
 	{
-		cpBodyDestroy(_p);
+		BOOST_FOREACH(Shapes::Shape* shape, _shapes)
+		{
+			delete shape;
+		}
+
 		cpBodyFree(_p);
 	}
 
@@ -65,11 +69,15 @@ namespace Chipmunk {
 	float Body::moment() const { return _p->i; }
 	Vector2 Body::rotation() const { return _p->rot; }
 	Vector2 Body::position() const { return _p->p; }
+	Vector2 Body::velocity() const { return _p->v; }
+	Vector2 Body::force() const { return _p->f; }
 
 	Body& Body::mass(float m) { cpBodySetMass(_p, m); return *this; }
 	Body& Body::moment(float i) { cpBodySetMoment(_p, i); return *this; }
 	Body& Body::angle(float a) { cpBodySetAngle(_p, a); return *this; }
 	Body& Body::position(Vector2 p) { _p->p = p; return *this; }
+	Body& Body::velocity(Vector2 v) { _p->v = v; return *this; }
+	Body& Body::force(Vector2 f) { _p->f = f; return *this; }
 
 	Body&
 	Body::slew(Vector2 pos, float dt)
@@ -117,56 +125,44 @@ namespace Chipmunk {
 		return *this;
 	}
 
-	Shape&
-	Body::shapeCircle(float radius, Vector2 offset)
+	void
+	Body::addShape(Shapes::Shape* shape)
 	{
-		_shapes.push_back(Shape::circle(*this, radius, offset));
-		return _shapes[_shapes.size() - 1];
-	}
-
-	Shape&
-	Body::shapePolygon(std::vector<Vector2> vertices, Vector2 offset)
-	{
-		_shapes.push_back(Shape::polygon(*this, vertices, offset));
-		return _shapes[_shapes.size() - 1];
-	}
-
-	Shape&
-	Body::shapeSegment(Vector2 a, Vector2 b, float radius)
-	{
-		_shapes.push_back(Shape::segment(*this, a, b, radius));
-		return _shapes[_shapes.size() - 1];
+		_shapes.push_back(shape);
 	}
 
 // Shape
 
-	Shape::Shape(cpShape* shape)
+	Shapes::Shape::~Shape()
 	{
-		_p = shape;
+		cpShapeFree(_p);
 	}
 
-	Shape
-	Shape::circle(Body& body, float radius, Vector2 offset)
+	float Shapes::Shape::elasticity() const { return _p->e; }
+	float Shapes::Shape::friction() const { return _p->u; }
+
+	Shapes::Shape& Shapes::Shape::elasticity(float e) { _p->e = e; return *this; }
+	Shapes::Shape& Shapes::Shape::friction(float u) { _p->u = u; return *this; }
+
+	// Circle
+
+	Shapes::Circle::Circle(Body& body, float radius, Vector2 offset)
 	{
-		return Shape(cpCircleShapeNew(body.p(), radius, offset));
+		_p = cpCircleShapeNew(body.p(), radius, offset);
 	}
 
-	Shape
-	Shape::polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset)
+	// Polygon
+
+	Shapes::Polygon::Polygon(Body& body, std::vector<Vector2> vertices, Vector2 offset)
 	{
-		return Shape(cpPolyShapeNew(body.p(), vertices.size(), &vertices[0], offset));
+		_p = cpPolyShapeNew(body.p(), vertices.size(), &vertices[0], offset);
 	}
 
-	Shape
-	Shape::segment(Body& body, Vector2 a, Vector2 b, float radius)
+	// Segment
+
+	Shapes::Segment::Segment(Body& body, Vector2 a, Vector2 b, float radius)
 	{
-		return Shape(cpSegmentShapeNew(body.p(), a, b, radius));
+		_p = cpSegmentShapeNew(body.p(), a, b, radius);
 	}
 
-	float Shape::elasticity() const { return _p->e; }
-
-	float Shape::friction() const { return _p->u; }
-
-	Shape& Shape::elasticity(float e) { _p->e = e; return *this; }
-	Shape& Shape::friction(float u) { _p->u = u; return *this; }
 }
