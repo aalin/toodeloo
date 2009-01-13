@@ -16,6 +16,7 @@ class PlayState : public AbstractState
 	private:
 		Chipmunk::Space _space;
 		Player _player;
+		Map _map;
 };
 
 #endif

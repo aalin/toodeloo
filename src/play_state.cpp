@@ -1,7 +1,9 @@
 #include "common.hpp"
 
 PlayState::PlayState(Engine& engine)
-	: AbstractState(engine), _player(Player(*this))
+	: AbstractState(engine),
+	  _player(Player(*this)),
+	  _map(*this, "map.txt")
 {
 	_space.gravity(cpv(0, -100));
 }

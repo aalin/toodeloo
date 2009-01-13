@@ -27,6 +27,7 @@ set(SHARED_SOURCES
 	engine
 	chipmunk
 	player
+	map
 )
 
 set(MAIN_SOURCES main ${SHARED_SOURCES})
