@@ -21,6 +21,7 @@ namespace Chipmunk {
 
 			void update();
 
+			Space& addShape(Shapes::Shape*);
 			Space& addStaticShape(Shapes::Shape*);
 			Space& addBody(Body&);
 
@@ -33,7 +34,7 @@ namespace Chipmunk {
 	class Body
 	{
 		public:
-			Body(float m, float i);
+			Body(Space& _space, float m, float i);
 			~Body();
 
 			float mass() const;
@@ -71,6 +72,7 @@ namespace Chipmunk {
 			cpBody* p() { return _p; };
 
 		private:
+			Space& _space;
 			cpBody* _p;
 			std::vector<Shapes::Shape*> _shapes;
 	};

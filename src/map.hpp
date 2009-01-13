@@ -1,10 +1,12 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+class PlayState;
+
 class Map
 {
 	public:
-		Map(std::string filename);
+		Map(PlayState& state, std::string filename);
 	private:
 		Chipmunk::Body _body;
 };

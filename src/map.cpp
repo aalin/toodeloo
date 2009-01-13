@@ -1,7 +1,7 @@
 #include "common.hpp"
 
-Map::Map(std::string filename)
-	: _body(INFINITE, INFINITE)
+Map::Map(PlayState& state, std::string filename)
+	: _body(state.space(), INFINITE, INFINITE)
 {
 	ifstream f(filename.c_str());
 	if(!f.good())

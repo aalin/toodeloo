@@ -1,7 +1,7 @@
 #include "common.hpp"
 
 Player::Player(PlayState& state)
-	: _body(1.0, 1.0), _state(state)
+	: _body(state.space(), 1.0, 1.0), _state(state)
 {
 	_body.position(cpv(-280, 240));
 
@@ -57,7 +57,7 @@ Player::draw()
 	glBegin(GL_LINE_LOOP);
 		glColor3f(1.0, 1.0, 1.0);
 		BOOST_FOREACH(Chipmunk::Vector2 &v, _vertices)
-			glVertex2f(v.x, v.y);
+			glVertex2f(v.x + _body.position().x, v.y + _body.position().y);
 	glEnd();
 }
 

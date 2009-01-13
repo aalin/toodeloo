@@ -12,7 +12,7 @@ namespace Chipmunk {
 
 	Space::~Space()
 	{
-		cpSpaceFreeChildren(_p);
+		//cpSpaceFreeChildren(_p);
 		cpSpaceFree(_p);
 	}
 
@@ -37,6 +37,12 @@ namespace Chipmunk {
 	}
 
 	Space&
+	Space::addShape(Shapes::Shape* shape)
+	{
+		cpSpaceAddShape(_p, shape->p());
+	}
+
+	Space&
 	Space::addStaticShape(Shapes::Shape* shape)
 	{
 		cpSpaceAddStaticShape(_p, shape->p());
@@ -50,9 +56,11 @@ namespace Chipmunk {
 
 // Body
 
-	Body::Body(float m, float i)
+	Body::Body(Space& space, float m, float i)
+		: _space(space)
 	{
 		_p = cpBodyNew(m, i);
+		_space.addBody(*this);
 	}
 
 	Body::~Body()
@@ -129,6 +137,7 @@ namespace Chipmunk {
 	Body::addShape(Shapes::Shape* shape)
 	{
 		_shapes.push_back(shape);
+		_space.addShape(shape);
 	}
 
 // Shape
