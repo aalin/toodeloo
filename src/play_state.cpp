@@ -14,6 +14,7 @@ PlayState::update()
 {
 	Uint8* keys = SDL_GetKeyState(NULL);
 	_player.update();
+	_map.update();
 
 	_space.update();
 }
@@ -49,6 +50,7 @@ PlayState::draw()
 	glTranslatef(0.5, 0.5, 0.0);
 
 	glMatrixMode(GL_MODELVIEW);
+	_space.draw();
 	_player.draw();
 }
 

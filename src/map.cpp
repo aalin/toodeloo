@@ -54,3 +54,9 @@ Map::Map(PlayState& state, std::string filename)
 	}
 }
 
+void
+Map::update()
+{
+	// std::cout << _body.position().x << "x" << _body.position().y << std::endl;
+}
+

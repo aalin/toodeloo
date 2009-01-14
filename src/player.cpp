@@ -15,6 +15,8 @@ Player::Player(PlayState& state)
 	poly->elasticity(1.0);
 	poly->friction(1.0);
 	_body.addShape(poly);
+
+	_body.addToSpace();
 }
 
 Player::~Player()
@@ -54,10 +56,11 @@ Player::update()
 void
 Player::draw()
 {
+	/*
 	glBegin(GL_LINE_LOOP);
 		glColor3f(1.0, 1.0, 1.0);
 		BOOST_FOREACH(Chipmunk::Vector2 &v, _vertices)
 			glVertex2f(v.x + _body.position().x, v.y + _body.position().y);
-	glEnd();
+	glEnd();*/
 }
 

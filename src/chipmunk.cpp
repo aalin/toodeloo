@@ -45,13 +45,100 @@ namespace Chipmunk {
 	Space&
 	Space::addStaticShape(Shapes::Shape* shape)
 	{
+		std::cout << "Space::addStaticShape(" << shape << ")" << std::endl;
 		cpSpaceAddStaticShape(_p, shape->p());
 	}
 
 	Space&
 	Space::addBody(Body& body)
 	{
+		std::cout << "Space::addBody(" << &body << ")" << std::endl;
 		cpSpaceAddBody(_p, body.p());
+	}
+
+	void
+	Space::draw()
+	{
+		glColor3f(1.0, 1.0, 1.0);
+		cpSpaceHashEach(_p->activeShapes, &Space::drawObject, 0);
+		cpSpaceHashEach(_p->staticShapes, &Space::drawObject, 0);
+	}
+
+	void
+	Space::drawObject(void* ptr, void* unused)
+	{
+		cpShape* shape = static_cast<cpShape*>(ptr);
+		switch(shape->klass->type)
+		{
+			case CP_CIRCLE_SHAPE:
+				Space::drawCircleShape(shape);
+				break;
+			case CP_SEGMENT_SHAPE:
+				Space::drawSegmentShape(shape);
+				break;
+			case CP_POLY_SHAPE:
+				Space::drawPolyShape(shape);
+				break;
+			default:
+				std::cout << "bad enum in drawObject" << std::endl;
+				break;
+		}
+	}
+
+	void drawCircle(cpFloat x, cpFloat y, cpFloat r, cpFloat a)
+	{
+		const int segs = 15;
+		const cpFloat coef = 2.0 * 3.0849609375 / (cpFloat)segs;
+
+		glBegin(GL_LINE_STRIP);
+			for(int n = 0; n <= segs; n++)
+			{
+				cpFloat rads = n*coef;
+				glVertex2f(r*std::cos(rads + a) + x, r*std::sin(rads + a) + y);
+			}
+			glVertex2f(x,y);
+		glEnd();
+	}
+
+	void
+	Space::drawCircleShape(cpShape* shape)
+	{
+		cpBody *body = shape->body;
+		cpCircleShape *circle = (cpCircleShape *)shape;
+		cpVect c = cpvadd(body->p, cpvrotate(circle->c, body->rot));
+		drawCircle(c.x, c.y, circle->r, body->a);
+	}
+
+	void
+	Space::drawSegmentShape(cpShape* shape)
+	{
+		cpBody *body = shape->body;
+		cpSegmentShape *seg = (cpSegmentShape *)shape;
+		cpVect a = cpvadd(body->p, cpvrotate(seg->a, body->rot));
+		cpVect b = cpvadd(body->p, cpvrotate(seg->b, body->rot));
+
+		glBegin(GL_LINES);
+			glVertex2f(a.x, a.y);
+			glVertex2f(b.x, b.y);
+		glEnd();
+	}
+
+	void
+	Space::drawPolyShape(cpShape* shape)
+	{
+		cpBody *body = shape->body;
+		cpPolyShape *poly = (cpPolyShape *)shape;
+
+		int num = poly->numVerts;
+		cpVect *verts = poly->verts;
+
+		glBegin(GL_LINE_LOOP);
+			for(int i=0; i<num; i++)
+			{
+				cpVect v = cpvadd(body->p, cpvrotate(verts[i], body->rot));
+				glVertex2f(v.x, v.y);
+			}
+		glEnd();
 	}
 
 // Body
@@ -60,7 +147,6 @@ namespace Chipmunk {
 		: _space(space)
 	{
 		_p = cpBodyNew(m, i);
-		_space.addBody(*this);
 	}
 
 	Body::~Body()
@@ -71,6 +157,12 @@ namespace Chipmunk {
 		}
 
 		cpBodyFree(_p);
+	}
+
+	void
+	Body::addToSpace()
+	{
+		_space.addBody(*this);
 	}
 
 	float Body::mass() const { return _p->m; }

@@ -7,6 +7,7 @@ class Map
 {
 	public:
 		Map(PlayState& state, std::string filename);
+		void update();
 	private:
 		Chipmunk::Body _body;
 };

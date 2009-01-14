@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <cmath>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/foreach.hpp>

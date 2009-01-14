@@ -19,6 +19,7 @@ namespace Chipmunk {
 			Vector2 gravity() const;
 			Space& gravity(Vector2 v);
 
+			void draw();
 			void update();
 
 			Space& addShape(Shapes::Shape*);
@@ -29,6 +30,10 @@ namespace Chipmunk {
 			
 		private:
 			cpSpace* _p;
+			static void drawObject(void* ptr, void* unused);
+			static void drawCircleShape(cpShape* shape);
+			static void drawSegmentShape(cpShape* shape);
+			static void drawPolyShape(cpShape* shape);
 	};
 
 	class Body
@@ -36,6 +41,8 @@ namespace Chipmunk {
 		public:
 			Body(Space& _space, float m, float i);
 			~Body();
+
+			void addToSpace();
 
 			float mass() const;
 			float moment() const;
