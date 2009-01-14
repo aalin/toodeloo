@@ -2,7 +2,7 @@
 
 Player::Player(PlayState& state)
 	:
-		_body(state.space(), 50.0, 100.0),
+		_body(state.space(), 50.0, INFINITY),
 		_state(state)
 {
 	_body.position(cpv(0, 0));
