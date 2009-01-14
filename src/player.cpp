@@ -1,22 +1,27 @@
 #include "common.hpp"
 
 Player::Player(PlayState& state)
-	: _body(state.space(), 1.0, 1.0), _state(state)
+	:
+		_body(state.space(), 1.0, 1.0),
+		_tracer(state.space(), 1.0, 1.0),
+		_state(state)
 {
 	_body.position(cpv(0, 0));
+	_tracer.position(cpv(0, 0));
 
-	_vertices = boost::assign::list_of
-		(cpv(-15, -15))
-		(cpv( 15, -15))
-		(cpv( 15,  15))
-		(cpv(-15,  15));
-
-	Chipmunk::Shapes::Polygon* poly = new Chipmunk::Shapes::Polygon(_body, _vertices, cpvzero);
-	poly->elasticity(1.0);
-	poly->friction(1.0);
-	_body.addShape(poly);
-
+	Chipmunk::Shapes::Circle* circle = new Chipmunk::Shapes::Circle(_body, 5.0, cpvzero);
+	circle->group(1);
+	circle->elasticity(1.0);
+	circle->friction(1.0);
+	_body.addShape(circle);
 	_body.addToSpace();
+
+	Chipmunk::Shapes::Circle* tracer_circle = new Chipmunk::Shapes::Circle(_tracer, 1.0, cpvzero);
+	tracer_circle->group(1);
+	tracer_circle->elasticity(1.0);
+	tracer_circle->friction(1.0);
+	_tracer.addShape(tracer_circle);
+	_tracer.addToSpace();
 }
 
 Player::~Player()

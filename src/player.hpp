@@ -20,6 +20,7 @@ class Player
 
 	private:
 		Chipmunk::Body _body;
+		Chipmunk::Body _tracer;
 		std::vector<Chipmunk::Vector2> _vertices;
 		PlayState& _state;
 };

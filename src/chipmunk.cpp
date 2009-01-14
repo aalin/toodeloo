@@ -248,9 +248,11 @@ namespace Chipmunk {
 
 	float Shapes::Shape::elasticity() const { return _p->e; }
 	float Shapes::Shape::friction() const { return _p->u; }
+	int Shapes::Shape::group() const { return _p->group; }
 
 	Shapes::Shape& Shapes::Shape::elasticity(float e) { _p->e = e; return *this; }
 	Shapes::Shape& Shapes::Shape::friction(float u) { _p->u = u; return *this; }
+	Shapes::Shape& Shapes::Shape::group(int g) { std::cout << "setting group to " << g << std::endl; _p->group = g; return *this; }
 
 	// Circle
 

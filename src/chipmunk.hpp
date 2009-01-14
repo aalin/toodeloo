@@ -98,11 +98,13 @@ namespace Chipmunk {
 
 				float elasticity() const;
 				float friction() const;
+				int group() const;
 
 				// TODO: virtual void draw() = 0;
 
 				Shape& elasticity(float e);
 				Shape& friction(float u);
+				Shape& group(int group);
 
 			protected:
 				cpShape* _p;
