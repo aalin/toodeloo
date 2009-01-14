@@ -16,6 +16,8 @@ class Player
 		void goRight();
 		void jump();
 
+		Chipmunk::Vector2 position() const { return _body.position(); }
+
 	private:
 		Chipmunk::Body _body;
 		std::vector<Chipmunk::Vector2> _vertices;
