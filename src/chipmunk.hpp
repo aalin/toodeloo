@@ -10,6 +10,11 @@ namespace Chipmunk {
 		class Shape;
 	}
 
+	namespace Joints
+	{
+		class Joint;
+	}
+
 	class Space
 	{
 		public:
@@ -26,10 +31,13 @@ namespace Chipmunk {
 			Space& addStaticShape(Shapes::Shape*);
 			Space& addBody(Body&);
 
+			Space& addJoint(Joints::Joint*);
+
 			cpSpace* p() { return _p; }
 			
 		private:
 			cpSpace* _p;
+			std::vector<Joints::Joint*> _joints;
 			static void drawObject(void* ptr, void* unused);
 			static void drawCircleShape(cpShape* shape);
 			static void drawSegmentShape(cpShape* shape);
@@ -85,6 +93,58 @@ namespace Chipmunk {
 			std::vector<Shapes::Shape*> _shapes;
 	};
 
+	namespace Joints
+	{
+		class Joint
+		{
+			public:
+				~Joint()
+				{
+					cpJointFree(_p);
+				}
+
+				cpJoint* p() { return _p; }
+			protected:
+				cpJoint* _p;
+		};
+
+		class Pin : public Joint
+		{
+			public:
+				Pin(Body& a, Body& b, Vector2 anchr1, Vector2 anchr2)
+				{
+					_p = cpPinJointNew(a.p(), b.p(), anchr1, anchr2);
+				}
+		};
+
+		class Slide : public Joint
+		{
+			public:
+				Slide(Body& a, Body& b, Vector2 anchr1, Vector2 anchr2, float min, float max)
+				{
+					_p = cpSlideJointNew(a.p(), b.p(), anchr1, anchr2, min, max);
+				}
+		};
+
+		class Pivot : public Joint
+		{
+			public:
+				Pivot(Body& a, Body& b, Vector2 pivot)
+				{
+					_p = cpPivotJointNew(a.p(), b.p(), pivot);
+				}
+		};
+
+		class Groove : public Joint
+		{
+			public:
+				Groove(Body& a, Body& b, Vector2 groove_a, Vector2 groove_b, Vector2 anchr2)
+				{
+					_p = cpGrooveJointNew(a.p(), b.p(), groove_a, groove_b, anchr2);
+				}
+		};
+	};
+
 	namespace Shapes
 	{
 		class Shape
@@ -99,12 +159,14 @@ namespace Chipmunk {
 				float elasticity() const;
 				float friction() const;
 				int group() const;
+				int layers() const;
 
 				// TODO: virtual void draw() = 0;
 
 				Shape& elasticity(float e);
 				Shape& friction(float u);
-				Shape& group(int group);
+				Shape& group(int g);
+				Shape& layers(int l);
 
 			protected:
 				cpShape* _p;

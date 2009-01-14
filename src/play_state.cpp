@@ -51,8 +51,7 @@ PlayState::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glPushMatrix();
-//		glTranslatef(-_player.position().x, -_player.position().y, 0.0);
-
+		glTranslatef(-_player.position().x, -_player.position().y, 0.0);
 		_space.draw();
 		_player.draw();
 	glPopMatrix();

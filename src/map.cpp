@@ -48,6 +48,8 @@ Map::Map(PlayState& state, std::string filename)
 				j = i + 1;
 
 			Chipmunk::Shapes::Shape* p = new Chipmunk::Shapes::Segment(_body, shape[i], shape[j], 1.0);
+			p->friction(1.0);
+			p->elasticity(1.0);
 			_body.addStaticShape(p);
 			std::cout << "  Segment: " << shape[i].x << "x" << shape[i].y << " - " << shape[j].x << "x" << shape[j].y << std::endl;
 		}

@@ -14,6 +14,9 @@ namespace Chipmunk {
 	{
 		//cpSpaceFreeChildren(_p);
 		cpSpaceFree(_p);
+
+		BOOST_FOREACH(Joints::Joint* joint, _joints)
+			delete joint;
 	}
 
 	Vector2
@@ -54,6 +57,13 @@ namespace Chipmunk {
 	{
 		std::cout << "Space::addBody(" << &body << ")" << std::endl;
 		cpSpaceAddBody(_p, body.p());
+	}
+
+	Space&
+	Space::addJoint(Joints::Joint* joint)
+	{
+		_joints.push_back(joint);
+		cpSpaceAddJoint(_p, joint->p());
 	}
 
 	void
@@ -249,10 +259,12 @@ namespace Chipmunk {
 	float Shapes::Shape::elasticity() const { return _p->e; }
 	float Shapes::Shape::friction() const { return _p->u; }
 	int Shapes::Shape::group() const { return _p->group; }
+	int Shapes::Shape::layers() const { return _p->layers; }
 
 	Shapes::Shape& Shapes::Shape::elasticity(float e) { _p->e = e; return *this; }
 	Shapes::Shape& Shapes::Shape::friction(float u) { _p->u = u; return *this; }
-	Shapes::Shape& Shapes::Shape::group(int g) { std::cout << "setting group to " << g << std::endl; _p->group = g; return *this; }
+	Shapes::Shape& Shapes::Shape::group(int g) { _p->group = g; return *this; }
+	Shapes::Shape& Shapes::Shape::layers(int l) { _p->layers = l; return *this; }
 
 	// Circle
 

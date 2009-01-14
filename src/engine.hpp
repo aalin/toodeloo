@@ -5,6 +5,21 @@ class AbstractState;
 
 class Engine {
 	public:
+		struct Layers
+		{
+			enum Layer
+			{
+				None = 0,
+				Background1 = 1,
+				Background2 = 2,
+				Background3 = 4,
+				Playfield = 8,
+				Interface1 = 16,
+				Interface2 = 32,
+				Interface3 = 64,
+				Interface4 = 128
+			};
+		};
 		Engine(int, int, bool);
 		~Engine();
 
