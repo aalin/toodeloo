@@ -3,7 +3,7 @@
 Player::Player(PlayState& state)
 	: _body(state.space(), 1.0, 1.0), _state(state)
 {
-	_body.position(cpv(-280, 240));
+	_body.position(cpv(0, 0));
 
 	_vertices = boost::assign::list_of
 		(cpv(-15, -15))
@@ -25,8 +25,8 @@ void
 Player::goLeft()
 {
 	Chipmunk::Vector2 v = _body.velocity();
-	v.x -= 2.5;
-	v.y -= 1;
+	v.x -= 5.0;
+	v.y += 1.0;
 	_body.velocity(v);
 }
 
@@ -34,15 +34,15 @@ void
 Player::goRight()
 {
 	Chipmunk::Vector2 v = _body.velocity();
-	v.x += 2.5;
-	v.y -= 1;
+	v.x += 5.0;
+	v.y += 1.0;
 	_body.velocity(v);
 }
 
 void Player::jump()
 {
 	Chipmunk::Vector2 v = _body.velocity();
-	v.y -= 5;
+	v.y += 15;
 	_body.velocity(v);
 }
 

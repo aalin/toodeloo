@@ -3,13 +3,15 @@
 #include <sstream>
 
 Map::Map(PlayState& state, std::string filename)
-	: _body(state.space(), std::numeric_limits<int>::max(), std::numeric_limits<int>::max())
+	: _body(state.space(), INFINITY, INFINITY)
 {
 	std::ifstream f(filename.c_str());
 	if(!f.good())
 		throw std::runtime_error("file not found");
 
-	std::vector<Chipmunk::Vector2> current_vectors;
+	std::vector<std::vector<Chipmunk::Vector2> > shapes;
+
+	std::vector<Chipmunk::Vector2> current_shape;
 
 	while(f.good())
 	{
@@ -18,16 +20,11 @@ Map::Map(PlayState& state, std::string filename)
 
 		if(line.length() == 0)
 		{
-			if(current_vectors.size() == 0)
+			if(current_shape.size() == 0)
 				continue;
 
-			for(int i = 0; i < current_vectors.size(); i++)
-			{
-				int j = i < current_vectors.size() ? i : j;
-				_body.addShape(new Chipmunk::Shapes::Segment(_body, current_vectors[i], current_vectors[j], 1.0));
-			}
-			// Clear the current_vectors-thing
-			std::vector<Chipmunk::Vector2>().swap(current_vectors);
+			shapes.push_back(current_shape);
+			std::vector<Chipmunk::Vector2>().swap(current_shape);
 		}
 		else
 		{
@@ -37,7 +34,22 @@ Map::Map(PlayState& state, std::string filename)
 			Chipmunk::Vector2 v;
 			ss >> v.x;
 			ss >> v.y;
-			current_vectors.push_back(v);
+			current_shape.push_back(v);
+		}
+	}
+	
+	BOOST_FOREACH(std::vector<Chipmunk::Vector2> shape, shapes)
+	{
+		std::cout << "New shape: " << std::endl;
+		for(int i = 0; i < shape.size(); i++)
+		{
+			int j = 0;
+			if(i < (shape.size() - 1))
+				j = i + 1;
+
+			Chipmunk::Shapes::Shape* p = new Chipmunk::Shapes::Segment(_body, shape[i], shape[j], 1.0);
+			_body.addStaticShape(p);
+			std::cout << "  Segment: " << shape[i].x << "x" << shape[i].y << " - " << shape[j].x << "x" << shape[j].y << std::endl;
 		}
 	}
 }

@@ -56,7 +56,7 @@ Engine::changeState(boost::shared_ptr<AbstractState> state)
 void
 Engine::initGL()
 {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	glPointSize(3.0);
 
@@ -67,8 +67,6 @@ Engine::initGL()
 	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 	glHint(GL_POINT_SMOOTH_HINT, GL_DONT_CARE);
 	glLineWidth(2.5f);
-
-	glEnable(GL_TEXTURE_2D);
 }
 
 void
@@ -143,6 +141,7 @@ Engine::update()
 void
 Engine::draw()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
 	if(_states.empty())
 		throw std::runtime_error("No states.");
 	_states.top()->draw();

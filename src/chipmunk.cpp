@@ -140,6 +140,13 @@ namespace Chipmunk {
 		_space.addShape(shape);
 	}
 
+	void
+	Body::addStaticShape(Shapes::Shape* shape)
+	{
+		_shapes.push_back(shape);
+		_space.addStaticShape(shape);
+	}
+
 // Shape
 
 	Shapes::Shape::~Shape()

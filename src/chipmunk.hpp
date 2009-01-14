@@ -60,6 +60,7 @@ namespace Chipmunk {
 			Body& applyForce(Vector2, Vector2);
 
 			void addShape(Shapes::Shape*);
+			void addStaticShape(Shapes::Shape*);
 
 			// Apply a spring force between this and another body at anchors anchr1 and anchr2
 			// respectively. k is the spring constant (Young's modulus), rlen is the

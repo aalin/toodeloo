@@ -5,7 +5,8 @@ PlayState::PlayState(Engine& engine)
 	  _player(Player(*this)),
 	  _map(*this, "map.txt")
 {
-	_space.gravity(cpv(0, -100));
+	cpInitChipmunk();
+	_space.gravity(cpv(0, -5));
 }
 
 void
