@@ -26,6 +26,7 @@
 #include <chipmunk/chipmunk.h>
 #include "chipmunk.hpp"
 
+#include "bridge.hpp"
 #include "map.hpp"
 
 #include "engine.hpp"

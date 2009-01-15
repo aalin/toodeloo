@@ -72,12 +72,26 @@ namespace Chipmunk {
 		glColor3f(1.0, 1.0, 1.0);
 		cpSpaceHashEach(_p->activeShapes, &Space::drawObject, 0);
 		cpSpaceHashEach(_p->staticShapes, &Space::drawObject, 0);
+		cpArrayEach(_p->joints, &Space::drawJoint, 0);
+	}
+
+	void
+	Space::drawJoint(void* ptr, void* unused)
+	{
+		cpJoint* joint = static_cast<cpJoint*>(ptr);
+
+		glColor3f(0.0, 0.0, 1.0);
+		glBegin(GL_LINES);
+		glVertex3f(joint->a->p.x, joint->a->p.y, 0.0);
+		glVertex3f(joint->b->p.x, joint->b->p.y, 0.0);
+		glEnd();
 	}
 
 	void
 	Space::drawObject(void* ptr, void* unused)
 	{
 		cpShape* shape = static_cast<cpShape*>(ptr);
+
 		switch(shape->klass->type)
 		{
 			case CP_CIRCLE_SHAPE:

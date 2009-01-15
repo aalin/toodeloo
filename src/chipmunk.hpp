@@ -39,6 +39,7 @@ namespace Chipmunk {
 			cpSpace* _p;
 			std::vector<Joints::Joint*> _joints;
 			static void drawObject(void* ptr, void* unused);
+			static void drawJoint(void* ptr, void* unused);
 			static void drawCircleShape(cpShape* shape);
 			static void drawSegmentShape(cpShape* shape);
 			static void drawPolyShape(cpShape* shape);

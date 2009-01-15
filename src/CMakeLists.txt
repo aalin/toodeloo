@@ -28,6 +28,7 @@ set(SHARED_SOURCES
 	chipmunk
 	player
 	map
+	bridge
 )
 
 set(MAIN_SOURCES main ${SHARED_SOURCES})
