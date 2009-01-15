@@ -19,7 +19,7 @@ Bridge::Bridge(Chipmunk::Space& space, Chipmunk::Body& body1, Chipmunk::Vector2 
 		Chipmunk::Body* body = new Chipmunk::Body(space, 5.0, INFINITY);
 		body->position(cpv(x, y));
 
-		Chipmunk::Shapes::Circle* shape = new Chipmunk::Shapes::Circle(*body, 1.0, cpvzero);
+		Chipmunk::Shapes::Circle* shape = new Chipmunk::Shapes::Circle(*body, 2.5, cpvzero);
 		shape->elasticity(1.0);
 		shape->friction(1.0);
 
@@ -35,7 +35,6 @@ Bridge::Bridge(Chipmunk::Space& space, Chipmunk::Body& body1, Chipmunk::Vector2 
 		Chipmunk::Body& two = (i == _bodies.size() - 1) ? body2 : *_bodies[i+1];
 
 		std::cout << "joint between " << &one << " and " << &two << std::endl;
-		// space.addJoint(new Chipmunk::Joints::Pivot(one, two, cpv(20, 20)));
-		space.addJoint(new Chipmunk::Joints::Slide(one, two, cpv(0, 0), cpv(0.1, 0.1), 20, 20));
+		space.addJoint(new Chipmunk::Joints::Slide(one, two, cpv(0, 0), cpv(0.1, 0.1), 20, 40));
 	}
 }
