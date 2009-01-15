@@ -2,14 +2,14 @@
 
 Player::Player(PlayState& state)
 	:
-		_body(state.space(), 50.0, INFINITY),
+		_body(state.space(), 5.0, 1.0),
 		_state(state)
 {
 	_body.position(cpv(0, 0));
 
 	Chipmunk::Shapes::Circle* circle = new Chipmunk::Shapes::Circle(_body, 5.0, cpvzero);
-	circle->group(1);
-	circle->elasticity(20.0);
+	//circle->group(1);
+	circle->elasticity(1.0);
 	circle->friction(1.0);
 	_body.addShape(circle);
 	_body.addToSpace();
@@ -40,7 +40,7 @@ Player::goRight()
 void Player::jump()
 {
 	Chipmunk::Vector2 v = _body.velocity();
-	v.y += 15;
+	v.y += 15.0;
 	_body.velocity(v);
 }
 

@@ -29,9 +29,9 @@ int main(int argc, char *argv[])
 	int start_time = SDL_GetTicks();
 	while(engine.isRunning())
 	{
+		engine.handleInput();
 		engine.update();
 		engine.draw();
-		engine.handleInput();
 
 		frames++;
 		int end_time = SDL_GetTicks();

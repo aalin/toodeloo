@@ -35,6 +35,7 @@ class Engine {
 		int getHeight() const;
 
 		bool isRunning() const;
+		void quit();
 	private:
 		bool _running;
 		SDL_Surface* _surface;

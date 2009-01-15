@@ -36,6 +36,12 @@ Engine::Engine(int width, int height, bool fullscreen)
 	initGL();
 }
 
+void
+Engine::quit()
+{
+	_running = false;
+}
+
 Engine::~Engine()
 {
 	std::cout << "~Engine();" << std::endl;

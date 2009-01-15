@@ -12,7 +12,6 @@ PlayState::PlayState(Engine& engine)
 void
 PlayState::update()
 {
-	Uint8* keys = SDL_GetKeyState(NULL);
 	_player.update();
 	_map.update();
 
@@ -22,6 +21,8 @@ PlayState::update()
 void
 PlayState::handleInput(const SDL_Event& event)
 {
+	uint8_t* keys = SDL_GetKeyState(NULL);
+
 	if(event.type == SDL_KEYDOWN)
 	{
 		switch(event.key.keysym.sym)
@@ -34,6 +35,9 @@ PlayState::handleInput(const SDL_Event& event)
 				break;
 			case SDLK_UP:
 				_player.jump();
+				break;
+			case SDLK_ESCAPE:
+				_engine.quit();
 				break;
 			default:
 				break;
