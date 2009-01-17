@@ -47,7 +47,7 @@ Map::Map(PlayState& state, std::string filename)
 		}
 	}
 
-	Bridge(state.space(), _body, cpv(-120, -180), _body, cpv(-20, -180), 10);
+	// Bridge(state.space(), _body, cpv(-120, -180), _body, cpv(-20, -180), 10);
 }
 
 void
