@@ -11,8 +11,8 @@ This is some play with Chipmunk with the goal of creating a platform game.
 
 ## To compile and run:
 
-  cd src
-  cmake .
-  make
-  ./game
+    cd src
+    cmake .
+    make
+    ./game
 
