@@ -25,11 +25,35 @@ namespace Chipmunk {
 		return _p->gravity;
 	}
 
+	int
+	Space::iterations() const
+	{
+		return _p->iterations;
+	}
+
+	int
+	Space::elasticIterations() const
+	{
+		return _p->elasticIterations;
+	}
+
 	Space&
 	Space::gravity(Vector2 v)
 	{
 		_p->gravity = v;
 		return *this;
+	}
+
+	Space&
+	Space::iterations(int iterations)
+	{
+		_p->iterations = iterations;
+	}
+
+	Space&
+	Space::elasticIterations(int elastic_iterations)
+	{
+		_p->elasticIterations = elastic_iterations;
 	}
 
 	void

@@ -17,7 +17,8 @@ class Engine {
 				Interface1 = 16,
 				Interface2 = 32,
 				Interface3 = 64,
-				Interface4 = 128
+				Interface4 = 128,
+				PlayerHands = 256
 			};
 		};
 		Engine(int, int, bool);

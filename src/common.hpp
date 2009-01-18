@@ -1,9 +1,10 @@
+#include <cmath>
 #include <iostream>
+#include <map>
 #include <stack>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <cmath>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/foreach.hpp>

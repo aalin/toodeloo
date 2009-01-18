@@ -22,7 +22,11 @@ namespace Chipmunk {
 			~Space();
 
 			Vector2 gravity() const;
+			int iterations() const;
+			int elasticIterations() const;
 			Space& gravity(Vector2 v);
+			Space& iterations(int iterations);
+			Space& elasticIterations(int elastic_iterations);
 
 			void draw();
 			void update();

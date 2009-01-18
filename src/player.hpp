@@ -15,13 +15,14 @@ class Player
 		void goLeft();
 		void goRight();
 		void jump();
+		void stop();
 
-		Chipmunk::Vector2 position() const { return _body.position(); }
+		Chipmunk::Vector2 position() const { return _bodies.at("bottom")->position(); }
 
 	private:
-		Chipmunk::Body _body;
-		std::vector<Chipmunk::Vector2> _vertices;
 		PlayState& _state;
+		Chipmunk::Shapes::Circle* _bottom;
+		std::map<std::string, Chipmunk::Body*> _bodies;
 };
 
 #endif

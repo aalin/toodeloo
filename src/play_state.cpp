@@ -7,6 +7,7 @@ PlayState::PlayState(Engine& engine)
 {
 	cpInitChipmunk();
 	_space.gravity(cpv(0, -5));
+	_space.elasticIterations(10);
 }
 
 void
@@ -21,7 +22,7 @@ PlayState::update()
 void
 PlayState::handleInput(const SDL_Event& event)
 {
-	uint8_t* keys = SDL_GetKeyState(NULL);
+//	uint8_t* keys = SDL_GetKeyState(NULL);
 
 	if(event.type == SDL_KEYDOWN)
 	{
