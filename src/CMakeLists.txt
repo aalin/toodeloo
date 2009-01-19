@@ -22,7 +22,7 @@ FIND_LIBRARY( CHIPMUNK_LIBRARY
         /usr/local/lib
         /sw/lib
         /opt/local/lib
-        DOC "The chipbajs library")
+        DOC "The chipmunk library")
  
 if(NOT SDL_FOUND)
         message(FATAL_ERROR "SDL not found!" )
