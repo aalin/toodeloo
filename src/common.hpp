@@ -27,6 +27,8 @@
 #include <chipmunk/chipmunk.h>
 #include "chipmunk.hpp"
 
+#include "vbo.hpp"
+
 #include "bridge.hpp"
 #include "map.hpp"
 

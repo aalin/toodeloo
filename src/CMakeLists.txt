@@ -52,6 +52,7 @@ set(SHARED_SOURCES
         player
         map
         bridge
+				vbo
 )
  
 set(MAIN_SOURCES main ${SHARED_SOURCES})
