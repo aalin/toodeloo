@@ -29,6 +29,8 @@
 
 #include "vbo.hpp"
 
+#include "vector2.hpp"
+
 #include "bridge.hpp"
 #include "map.hpp"
 
