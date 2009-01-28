@@ -53,6 +53,8 @@ set(SHARED_SOURCES
         map
         bridge
 				vbo
+				vector2
+				vector3
 )
  
 set(MAIN_SOURCES main ${SHARED_SOURCES})

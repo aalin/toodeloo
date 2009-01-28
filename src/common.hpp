@@ -30,6 +30,7 @@
 #include "vbo.hpp"
 
 #include "vector2.hpp"
+#include "vector3.hpp"
 
 #include "bridge.hpp"
 #include "map.hpp"
