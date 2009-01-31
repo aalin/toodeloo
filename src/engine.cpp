@@ -73,6 +73,17 @@ Engine::initGL()
 	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 	glHint(GL_POINT_SMOOTH_HINT, GL_DONT_CARE);
 	glLineWidth(2.5f);
+
+
+	glEnable(GL_FOG);
+	GLfloat fog_color[] = {0.3359375, 0.46875, 0.7578125, 0.2};
+	glFogfv(GL_FOG_COLOR, fog_color);
+	glFogi(GL_FOG_MODE, GL_LINEAR);
+	glFogf(GL_FOG_DENSITY, 0.5);
+	glHint(GL_FOG_HINT, GL_NICEST);
+	glFogf(GL_FOG_START, 150.0);
+	glFogf(GL_FOG_END, 1000.0);
+
 }
 
 void

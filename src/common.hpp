@@ -29,8 +29,17 @@
 
 #include "vbo.hpp"
 
+#include "math.hpp"
+#include "angle.hpp"
+
+#include "image.hpp"
+
 #include "vector2.hpp"
 #include "vector3.hpp"
+#include "vertex.hpp"
+#include "geometry.hpp"
+
+#include "heightmap.hpp"
 
 #include "bridge.hpp"
 #include "map.hpp"

@@ -3,7 +3,8 @@
 PlayState::PlayState(Engine& engine)
 	: AbstractState(engine),
 	  _player(Player(*this)),
-	  _map(*this, "map.txt")
+	  _map(*this, "map.txt"),
+	  _heightmap("heightmap.png")
 {
 	cpInitChipmunk();
 	_space.gravity(cpv(0, -5));
@@ -51,6 +52,21 @@ PlayState::draw()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	gluPerspective(30.0, 800/600.0, 0.1, 1000.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	gluLookAt(
+		0.0, 0.0, 0.0,
+		20.0, 0.0, 10.0,
+		0.0, 0.0, 1.0
+	);
+	_heightmap.draw();
+
+	/*
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	glOrtho(-320.0, 320.0, -240.0, 240.0, -1.0, 1.0);
 	
 	glMatrixMode(GL_MODELVIEW);
@@ -60,5 +76,6 @@ PlayState::draw()
 		_space.draw();
 		_player.draw();
 	glPopMatrix();
+	*/
 }
 

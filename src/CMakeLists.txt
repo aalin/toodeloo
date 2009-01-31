@@ -55,6 +55,10 @@ set(SHARED_SOURCES
 				vbo
 				vector2
 				vector3
+				heightmap
+				angle
+				image
+				geometry
 )
  
 set(MAIN_SOURCES main ${SHARED_SOURCES})
