@@ -9,6 +9,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <boost/assign/list_of.hpp>
+#include <boost/operators.hpp>
 
 #include <SDL/SDL.h>
 
@@ -43,6 +44,8 @@
 
 #include "bridge.hpp"
 #include "map.hpp"
+
+#include "camera.hpp"
 
 #include "engine.hpp"
 #include "states/state.hpp"

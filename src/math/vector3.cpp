@@ -1,11 +1,63 @@
-#include <cmath>
-#include <limits>
-#include "vector3.hpp"
+#include "../common.hpp"
 
 namespace Toodeloo
 {
 	namespace Math
 	{
+		Vector3&
+			Vector3::operator+=(const Vector3& v)
+			{
+				x += v.x;
+				y += v.y;
+				z += v.z;
+				return *this;
+			}
+
+		Vector3&
+			Vector3::operator=(const Vector3& v)
+			{
+				x = v.x;
+				y = v.y;
+				z = v.z;
+				return *this;
+			}
+
+		Vector3&
+			Vector3::operator-=(const Vector3& v)
+			{
+				x -= v.x;
+				y -= v.y;
+				z -= v.z;
+				return *this;
+			}
+
+		Vector3&
+			Vector3::operator*=(float f)
+			{
+				x *= f;
+				y *= f;
+				z *= f;
+				return *this;
+			}
+
+		Vector3&
+			Vector3::operator*=(const Vector3& v)
+			{
+				x *= v.x;
+				y *= v.y;
+				z *= v.z;
+				return *this;
+			}
+
+		Vector3&
+			Vector3::operator/=(float f)
+			{
+				x /= f;
+				y /= f;
+				z /= f;
+				return *this;
+			}
+
 		float
 			Vector3::getMagnitude() const
 			{

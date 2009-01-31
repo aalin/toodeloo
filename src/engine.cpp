@@ -86,6 +86,7 @@ namespace Toodeloo
 		glFogf(GL_FOG_START, 150.0);
 		glFogf(GL_FOG_END, 1000.0);
 
+		glEnable(GL_NORMALIZE);
 	}
 
 	void

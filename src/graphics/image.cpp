@@ -79,7 +79,7 @@ namespace Toodeloo
 			Image::at(int x, int y) const
 			{
 				const uint8_t *p = getPixelData() + y * getPitch() + x * getBpp();
-				*reinterpret_cast<const uint32_t*>(p);
+				return uint32_t(*reinterpret_cast<const uint32_t*>(p));
 			}
 	}
 }

@@ -20,6 +20,7 @@ namespace Toodeloo
 
 			private:
 				Wrappers::Chipmunk::Space _space;
+				Toodeloo::Camera _camera;
 				Toodeloo::Player _player;
 				Map _map;
 				Toodeloo::Heightmap _heightmap;

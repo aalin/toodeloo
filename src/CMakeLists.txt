@@ -47,6 +47,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
 set(SHARED_SOURCES 
 	# engine
 	engine
+	camera
 
 	# wrappers
 	wrappers/chipmunk

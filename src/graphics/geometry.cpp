@@ -65,21 +65,19 @@ namespace Toodeloo
 				_color_buffer->bind();
 				glColorPointer(4, GL_UNSIGNED_BYTE, 0, 0);
 
-				/*
-				   glEnableClientState(GL_NORMAL_ARRAY);
-				   _normal_buffer->bind();
-				   glNormalPointer(GL_FLOAT, 0, 0);
+				glEnableClientState(GL_NORMAL_ARRAY);
+				_normal_buffer->bind();
+				glNormalPointer(GL_FLOAT, 0, 0);
 
-				   glClientActiveTexture(GL_TEXTURE0);
-				   _texcoord_buffer->bind();
-				   glTexCoordPointer(2, GL_FLOAT, 0, 0);
-				   */
+				// glClientActiveTexture(GL_TEXTURE0);
+				// _texcoord_buffer->bind();
+				// glTexCoordPointer(2, GL_FLOAT, 0, 0);
 				glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(_positions.size()));
 
 				glDisableClientState(GL_VERTEX_ARRAY);
 				glDisableClientState(GL_COLOR_ARRAY);
-				//glDisableClientState(GL_NORMAL_ARRAY);
-				//glClientActiveTexture(GL_TEXTURE0);
+				glDisableClientState(GL_NORMAL_ARRAY);
+				// glClientActiveTexture(GL_TEXTURE0);
 			}
 
 	}
