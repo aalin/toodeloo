@@ -1,29 +1,35 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-class PlayState;
-
-class Player
+namespace Toodeloo
 {
-	public:
-		Player(PlayState& state);
-		~Player();
+	namespace States
+	{
+		class Gameplay;
+	}
 
-		void update();
-		void draw();
+	class Player
+	{
+		public:
+			Player(Toodeloo::States::Gameplay& state);
+			~Player();
 
-		void goLeft();
-		void goRight();
-		void jump();
-		void stop();
+			void update();
+			void draw();
 
-		Chipmunk::Vector2 position() const { return _bodies.at("bottom")->position(); }
+			void goLeft();
+			void goRight();
+			void jump();
+			void stop();
 
-	private:
-		PlayState& _state;
-		Chipmunk::Shapes::Circle* _bottom;
-		std::map<std::string, Chipmunk::Body*> _bodies;
-};
+			Wrappers::Chipmunk::Vector2 position() const { return _bodies.at("bottom")->position(); }
+
+		private:
+			Toodeloo::States::Gameplay& _state;
+			Wrappers::Chipmunk::Shapes::Circle* _bottom;
+			std::map<std::string, Wrappers::Chipmunk::Body*> _bodies;
+	};
+}
 
 #endif
 

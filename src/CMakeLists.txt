@@ -45,20 +45,31 @@ ${CHIPMUNK_INCLUDE_DIR}
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
  
 set(SHARED_SOURCES 
-        abstract_state
-        play_state
-        engine
-        chipmunk
-        player
-        map
-        bridge
-				vbo
-				vector2
-				vector3
-				heightmap
-				angle
-				image
-				geometry
+	# engine
+	engine
+
+	# wrappers
+	wrappers/chipmunk
+	wrappers/vbo
+
+	# in game stuff
+	player
+	bridge
+	heightmap
+	map
+
+	# math
+	math/vector2
+	math/vector3
+	math/angle
+
+	# graphics
+	graphics/image
+	graphics/geometry
+
+	# States
+	states/state
+	states/gameplay
 )
  
 set(MAIN_SOURCES main ${SHARED_SOURCES})

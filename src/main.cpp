@@ -1,4 +1,7 @@
 #include "common.hpp"
+#include "engine.hpp"
+#include "states/state.hpp"
+#include "states/gameplay.hpp"
 
 #ifdef __APPLE__
 int SDL_main(int argc, char *argv[])
@@ -12,10 +15,10 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	Engine engine(1024, 768, false);
+	Toodeloo::Engine engine(1024, 768, false);
 
 	try {
-		boost::shared_ptr<PlayState> play_state(new PlayState(engine));
+		boost::shared_ptr<Toodeloo::States::State> play_state(new Toodeloo::States::Gameplay(engine));
 		//boost::shared_ptr<TestState> play_state(new TestState(engine));
 		engine.pushState(play_state);
 	}

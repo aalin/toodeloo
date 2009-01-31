@@ -1,15 +1,18 @@
 #ifndef BRIDGE_HPP
 #define BRIDGE_HPP
 
-class Bridge
+namespace Toodeloo
 {
-	public:
-		Bridge(Chipmunk::Space& space, Chipmunk::Body& body1, Chipmunk::Vector2 pos1, Chipmunk::Body& body2, Chipmunk::Vector2 pos2, int steps);
+	class Bridge
+	{
+		public:
+			Bridge(Wrappers::Chipmunk::Space& space, Wrappers::Chipmunk::Body& body1, Wrappers::Chipmunk::Vector2 pos1, Wrappers::Chipmunk::Body& body2, Wrappers::Chipmunk::Vector2 pos2, int steps);
 
-	private:
-		std::vector<Chipmunk::Body*> _bodies;
-		Chipmunk::Space& _space;
-};
+		private:
+			std::vector<Wrappers::Chipmunk::Body*> _bodies;
+			Wrappers::Chipmunk::Space& _space;
+	};
+}
 
 #endif
 
