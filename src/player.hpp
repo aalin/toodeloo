@@ -22,12 +22,20 @@ namespace Toodeloo
 			void jump();
 			void stop();
 
-			Wrappers::Chipmunk::Vector2 position() const { return _bodies.at("bottom")->position(); }
+			Toodeloo::Wrappers::Chipmunk::Vector2 position() const
+			{
+				std::map<std::string, Toodeloo::Wrappers::Chipmunk::Body*>::const_iterator it = _bodies.find("bottom");
+
+				if(it == _bodies.end())
+					throw std::runtime_error("There is no bottom!");
+
+				return it->second->position();
+			}
 
 		private:
 			Toodeloo::States::Gameplay& _state;
-			Wrappers::Chipmunk::Shapes::Circle* _bottom;
-			std::map<std::string, Wrappers::Chipmunk::Body*> _bodies;
+			Toodeloo::Wrappers::Chipmunk::Shapes::Circle* _bottom;
+			std::map<std::string, Toodeloo::Wrappers::Chipmunk::Body*> _bodies;
 	};
 }
 
