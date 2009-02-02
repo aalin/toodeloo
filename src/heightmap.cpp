@@ -55,15 +55,16 @@ namespace Toodeloo
 			vertices[2].position = Toodeloo::Math::Vector3(x + 1.0, y + 1.0, heightAt(x + 1, y + 1));
 			vertices[3].position = Toodeloo::Math::Vector3(x + 0.0, y + 1.0, heightAt(x + 0, y + 1));
 
-			BOOST_FOREACH(Toodeloo::Graphics::Vertex& vertex, vertices)
-			{
-				vertex.normal = vertex.position.getNormalized();
-			}
-
 			vertices[0].color = _heightmap.at(x + 0, y + 0);
 			vertices[1].color = _heightmap.at(x + 1, y + 0);
 			vertices[2].color = _heightmap.at(x + 1, y + 1);
 			vertices[3].color = _heightmap.at(x + 0, y + 1);
+
+			BOOST_FOREACH(Toodeloo::Graphics::Vertex& vertex, vertices)
+			{
+				vertex.normal = vertex.position.getNormalized();
+				vertex.color |= 0xff000000;
+			}
 
 			return vertices;
 		}

@@ -65,6 +65,12 @@ namespace Toodeloo
 	Engine::initGL()
 	{
 		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glClearDepth(1);
+
+		glDepthFunc(GL_LEQUAL);
+		glEnable(GL_DEPTH_TEST);
+		glShadeModel(GL_SMOOTH);
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
 		glPointSize(3.0);
 
@@ -76,7 +82,6 @@ namespace Toodeloo
 		glHint(GL_POINT_SMOOTH_HINT, GL_DONT_CARE);
 		glLineWidth(2.5f);
 
-
 		glEnable(GL_FOG);
 		GLfloat fog_color[] = {0.3359375, 0.46875, 0.7578125, 0.2};
 		glFogfv(GL_FOG_COLOR, fog_color);
@@ -87,6 +92,8 @@ namespace Toodeloo
 		glFogf(GL_FOG_END, 1000.0);
 
 		glEnable(GL_NORMALIZE);
+
+		glEnable(GL_CULL_FACE);
 	}
 
 	void
@@ -161,7 +168,7 @@ namespace Toodeloo
 	void
 	Engine::draw()
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		if(_states.empty())
 			throw std::runtime_error("No states.");
 		_states.top()->draw();
