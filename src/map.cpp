@@ -7,23 +7,9 @@ namespace Toodeloo
 	Map::Map(Toodeloo::States::State& state, std::string filename)
 		: _shapes(load(filename))
 	{
-
-		/*
-		BOOST_FOREACH(std::vector<Toodeloo::Wrappers::Chipmunk::Vector2>& shape, shapes)
-		{
-			for(int i = 0; i < shape.size(); i+=2)
-			{
-				Toodeloo::Wrappers::Chipmunk::Shapes::Shape* p = new Toodeloo::Wrappers::Chipmunk::Shapes::Segment(_body, shape[i], shape[i+1], 1.0);
-				std::cout << "  Segment: " << shape[i].x << "x" << shape[i].y << " - " << shape[i+1].x << "x" << shape[i+1].y << std::endl;
-				p->elasticity(10.0);
-				p->friction(1.0);
-				_body.addStaticShape(p);
-			}
-		}
-		*/
-		// Bridge(state.space(), _body, cpv(-120, -180), _body, cpv(-20, -180), 10);
 	}
 
+	/*
 	void
 	Map::addToSpace(Wrappers::Chipmunk::Space& space)
 	{
@@ -50,6 +36,7 @@ namespace Toodeloo
 			}
 		}
 	}
+	*/
 
 	std::vector<std::vector<Math::Vector2> >
 	Map::load(std::string filename)

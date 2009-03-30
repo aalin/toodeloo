@@ -6,43 +6,19 @@ find_package(SDL)
 find_package(SDL_image)
 find_package(OpenGL)
 find_package(Boost)
- 
-FIND_PATH( CHIPMUNK_INCLUDE_DIR chipmunk/chipmunk.h
-        /usr/include
-        /usr/local/include
-        /sw/include
-        /opt/local/include
-        DOC "The directory where chipmunk/chipmunk.h resides")
-FIND_LIBRARY( CHIPMUNK_LIBRARY
-        NAMES CHIPMUNK chipmunk
-        PATHS
-        /usr/lib64
-        /usr/lib
-        /usr/local/lib64
-        /usr/local/lib
-        /sw/lib
-        /opt/local/lib
-        DOC "The chipmunk library")
- 
-if(NOT SDL_FOUND)
-        message(FATAL_ERROR "SDL not found!" )
-endif(NOT SDL_FOUND)
- 
-if(NOT SDLIMAGE_FOUND)
-        message(FATAL_ERROR "SDL Image not found!" )
-endif(NOT SDLIMAGE_FOUND)
- 
-if(NOT OPENGL_FOUND)
-        message(FATAL_ERROR "OpenGL not found!" )
-endif(NOT OPENGL_FOUND)
- 
-include_directories(${OPENGL_INCLUDE_DIR} ${SDL_INCLUDE_DIR}
-${SDLIMAGE_INCLUDE_DIR}
-${CHIPMUNK_INCLUDE_DIR}
+
+FIND_PATH(BOX2D_INCLUDE_DIR Box2D.h
+	box2d/*/Box2D/Include
 )
+
+FIND_LIBRARY(BOX2D_LIBRARY
+	NAMES BOX2D box2d
+	box2d/*/Box2D/Source/Gen/float
+)
+
+include_directories(${OPENGL_INCLUDE_DIR} ${SDL_INCLUDE_DIR} ${SDLIMAGE_INCLUDE_DIR} ${BOX2D_INCLUDE_DIR})
  
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb")
  
 set(SHARED_SOURCES 
 	# engine
@@ -50,12 +26,10 @@ set(SHARED_SOURCES
 	camera
 
 	# wrappers
-	wrappers/chipmunk
 	wrappers/vbo
 
 	# in game stuff
 	player
-	bridge
 	heightmap
 	map
 
@@ -83,4 +57,4 @@ endif(APPLE)
  
 add_executable(game ${MAIN_SOURCES})
 target_link_libraries(game ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${SDLIMAGE_LIBRARY} 
-    ${CHIPMUNK_LIBRARY} ${BOOST_LIBRARIES})
+    ${BOX2D_LIBRARY} ${BOOST_LIBRARIES})

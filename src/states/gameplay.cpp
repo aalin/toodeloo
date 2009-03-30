@@ -10,10 +10,6 @@ namespace Toodeloo
 			  _map(*this, "map.txt"),
 			  _heightmap("heightmap.png")
 		{
-			cpInitChipmunk();
-			_space.gravity(cpv(0, -5));
-			_space.elasticIterations(10);
-			_map.addToSpace(_space);
 		}
 
 		void
@@ -38,8 +34,6 @@ namespace Toodeloo
 			_camera.update();
 			_player.update();
 			_map.update();
-
-			_space.update();
 		}
 
 		void
@@ -80,7 +74,6 @@ namespace Toodeloo
 			glLoadIdentity();
 			glPushMatrix();
 			glTranslatef(-_player.position().x, -_player.position().y, 0.0);
-			_space.draw();
 			_player.draw();
 			glPopMatrix();
 		}

@@ -25,8 +25,7 @@
 #include <GL/glu.h>
 #endif
 
-#include <chipmunk/chipmunk.h>
-#include "wrappers/chipmunk.hpp"
+#include <Box2D.h>
 
 #include "wrappers/vbo.hpp"
 
@@ -42,7 +41,6 @@
 
 #include "heightmap.hpp"
 
-#include "bridge.hpp"
 #include "map.hpp"
 
 #include "camera.hpp"

@@ -3,3 +3,4 @@ CMakeFiles
 Makefile
 cmake_install.cmake
 game
+libbox2d.a

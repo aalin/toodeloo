@@ -16,10 +16,7 @@ namespace Toodeloo
 				void draw();
 				void handleInput(const SDL_Event&);
 
-				Wrappers::Chipmunk::Space& space() { return _space; };
-
 			private:
-				Wrappers::Chipmunk::Space _space;
 				Toodeloo::Camera _camera;
 				Toodeloo::Player _player;
 				Map _map;

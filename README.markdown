@@ -1,15 +1,17 @@
 # Toodeloo
 
-This is some play with Chipmunk with the goal of creating a platform game.
+This is some playing around with Box2D with the goal of creating a platform game.
 
 ## Requirements:
 
   * cmake
   * OpenGL
-  * [Chipmunk](http://code.google.com/p/chipmunk-physics/)
+  * [Box2D](http://www.box2d.org/)
   * SDL
 
 ## To compile and run:
+
+Follow the instructions in src/box2d/INSTRUCTIONS, and then do:
 
     cd src
     cmake .

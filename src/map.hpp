@@ -14,9 +14,7 @@ namespace Toodeloo
 			Map(Toodeloo::States::State& state, std::string filename);
 			void update();
 			void draw();
-			void addToSpace(Wrappers::Chipmunk::Space& space);
 		private:
-			boost::shared_ptr<Wrappers::Chipmunk::Body> _body;
 			std::vector<std::vector<Math::Vector2> > load(std::string filename);
 			std::vector<std::vector<Math::Vector2> > _shapes;
 	};
