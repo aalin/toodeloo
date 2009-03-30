@@ -4,11 +4,11 @@
 
 namespace Toodeloo
 {
-	Map::Map(Toodeloo::States::Gameplay& state, std::string filename)
-		: _body(state.space(), INFINITY, INFINITY)
+	Map::Map(Toodeloo::States::State& state, std::string filename)
+		: _shapes(load(filename))
 	{
-		std::vector<std::vector<Toodeloo::Wrappers::Chipmunk::Vector2> > shapes = load(state, filename);
 
+		/*
 		BOOST_FOREACH(std::vector<Toodeloo::Wrappers::Chipmunk::Vector2>& shape, shapes)
 		{
 			for(int i = 0; i < shape.size(); i+=2)
@@ -20,59 +20,86 @@ namespace Toodeloo
 				_body.addStaticShape(p);
 			}
 		}
+		*/
 		// Bridge(state.space(), _body, cpv(-120, -180), _body, cpv(-20, -180), 10);
 	}
 
-	std::vector<std::vector<Toodeloo::Wrappers::Chipmunk::Vector2> >
-		Map::load(Toodeloo::States::Gameplay& state, std::string filename)
+	void
+	Map::addToSpace(Wrappers::Chipmunk::Space& space)
+	{
+		if(_body.get())
+			return; // Don't make it if there is one already.
+
+		_body.reset(new Wrappers::Chipmunk::Body(space, INFINITY, INFINITY));
+
+		std::vector<std::vector<Toodeloo::Wrappers::Chipmunk::Vector2> > shapes;
+
+		BOOST_FOREACH(std::vector<Math::Vector2> shape, _shapes)
 		{
-			std::ifstream f(filename.c_str());
-			if(!f.good())
-				throw std::runtime_error("file not found");
-
-			std::vector<std::vector<Toodeloo::Wrappers::Chipmunk::Vector2> > shapes;
-			std::vector<Toodeloo::Wrappers::Chipmunk::Vector2> shape;
-
-			while(f.good())
+			for(int i = 0; i < shape.size(); i+=2)
 			{
-				std::string line;
-				getline(f, line);
+				Math::Vector2 v1 = shape[i];
+				Math::Vector2 v2 = shape[i+1];
 
-				if(line.length() == 0)
-				{
-					if(shape.size() == 0)
-						continue;
-
-					std::cout << "New shape, " << shape.size() << " vertices" << std::endl;
-
-					shapes.push_back(shape);
-
-					std::vector<Toodeloo::Wrappers::Chipmunk::Vector2>().swap(shape);
-				}
-				else
-				{
-					std::stringstream ss;
-					ss << line;
-
-					Toodeloo::Wrappers::Chipmunk::Vector2 v;
-					ss >> v.x;
-					ss >> v.y;
-					shape.push_back(v);
-				}
+				Toodeloo::Wrappers::Chipmunk::Shapes::Shape* p =
+					new Toodeloo::Wrappers::Chipmunk::Shapes::Segment(*_body, cpv(v1.x, v1.y), cpv(v2.x, v2.y), 1.0);
+				std::cout << "  Segment: " << shape[i].x << "x" << shape[i].y << " - " << shape[i+1].x << "x" << shape[i+1].y << std::endl;
+				p->elasticity(10.0);
+				p->friction(1.0);
+				_body->addStaticShape(p);
 			}
-
-			return shapes;
 		}
+	}
+
+	std::vector<std::vector<Math::Vector2> >
+	Map::load(std::string filename)
+	{
+		std::ifstream f(filename.c_str());
+		if(!f.good())
+			throw std::runtime_error("file not found");
+
+		std::vector<std::vector<Math::Vector2> > shapes;
+		std::vector<Math::Vector2> current_shape;
+
+		while(f.good())
+		{
+			std::string line;
+			getline(f, line);
+
+			if(line.length() == 0)
+			{
+				if(current_shape.size() == 0)
+					continue;
+
+				std::cout << "New shape, " << current_shape.size() << " vertices" << std::endl;
+
+				shapes.push_back(current_shape);
+
+				std::vector<Math::Vector2>().swap(current_shape);
+			}
+			else
+			{
+				std::stringstream ss;
+				ss << line;
+
+				Math::Vector2 v;
+				ss >> v.x;
+				ss >> v.y;
+				current_shape.push_back(v);
+			}
+		}
+		return shapes;
+	}
 
 	void
-		Map::update()
-		{
-			// std::cout << _body.position().x << "x" << _body.position().y << std::endl;
-		}
+	Map::update()
+	{
+		// std::cout << _body.position().x << "x" << _body.position().y << std::endl;
+	}
 
 	void
-		Map::draw()
-		{
+	Map::draw()
+	{
 
-		}
+	}
 }

@@ -5,18 +5,20 @@ namespace Toodeloo
 {
 	namespace States
 	{
-		class Gameplay;
+		class State;
 	}
 
 	class Map
 	{
 		public:
-			Map(Toodeloo::States::Gameplay& state, std::string filename);
+			Map(Toodeloo::States::State& state, std::string filename);
 			void update();
 			void draw();
+			void addToSpace(Wrappers::Chipmunk::Space& space);
 		private:
-			Wrappers::Chipmunk::Body _body;
-			std::vector<std::vector<Wrappers::Chipmunk::Vector2> > load(Toodeloo::States::Gameplay& state, std::string filename);
+			boost::shared_ptr<Wrappers::Chipmunk::Body> _body;
+			std::vector<std::vector<Math::Vector2> > load(std::string filename);
+			std::vector<std::vector<Math::Vector2> > _shapes;
 	};
 }
 

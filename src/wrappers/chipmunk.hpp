@@ -8,6 +8,7 @@ namespace Toodeloo
 		namespace Chipmunk
 		{
 			typedef cpVect Vector2;
+
 			class Body;
 
 			namespace Shapes

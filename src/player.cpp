@@ -50,20 +50,20 @@ namespace Toodeloo
 	void
 		Player::goLeft()
 		{
-			_bodies["center"]->applyImpulse(cpv(-2000.0, 1.0), cpvzero);
+			_bodies["bottom"]->applyImpulse(cpv(-2000.0, 1.0), cpvzero);
 			_bottom->friction(0.0);
 		}
 
 	void
 		Player::goRight()
 		{
-			_bodies["center"]->applyImpulse(cpv(2000.0, 1.0), cpvzero);
+			_bodies["bottom"]->applyImpulse(cpv(2000.0, 1.0), cpvzero);
 			_bottom->friction(0.0);
 		}
 
 	void Player::jump()
 	{
-		Toodeloo::Wrappers::Chipmunk::Vector2 v = _bodies["center"]->velocity();
+		Toodeloo::Wrappers::Chipmunk::Vector2 v = _bodies["bottom"]->velocity();
 		_bodies["bottom"]->applyImpulse(cpv(0.0, 5000.0), cpvzero);
 	}
 

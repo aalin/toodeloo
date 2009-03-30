@@ -50,4 +50,5 @@
 #include "engine.hpp"
 #include "states/state.hpp"
 #include "player.hpp"
+#include "states/editor.hpp"
 #include "states/gameplay.hpp"

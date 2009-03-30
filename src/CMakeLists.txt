@@ -71,8 +71,11 @@ set(SHARED_SOURCES
 	# States
 	states/state
 	states/gameplay
+	states/editor
 )
- 
+
+set(BOOST_LIBRARIES -lboost_program_options)
+
 set(MAIN_SOURCES main ${SHARED_SOURCES})
 if(APPLE)
         set(MAIN_SOURCES ${MAIN_SOURCES} sdl/SDLMain.m)
@@ -80,4 +83,4 @@ endif(APPLE)
  
 add_executable(game ${MAIN_SOURCES})
 target_link_libraries(game ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${SDLIMAGE_LIBRARY} 
-    ${CHIPMUNK_LIBRARY})
+    ${CHIPMUNK_LIBRARY} ${BOOST_LIBRARIES})
