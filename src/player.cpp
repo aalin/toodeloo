@@ -9,7 +9,7 @@ namespace Toodeloo
 		Toodeloo::Wrappers::Chipmunk::Body* body = _bodies["bottom"];
 
 		_bottom = new Toodeloo::Wrappers::Chipmunk::Shapes::Circle(*body, 5.0, cpv(0.0, 13.0));
-		_bottom->elasticity(0.1);
+		_bottom->elasticity(0.0);
 		_bottom->friction(1.0);
 		body->addShape(_bottom);
 
@@ -17,16 +17,6 @@ namespace Toodeloo
 		_bottom->elasticity(0.0);
 		_bottom->friction(1.0);
 		body->addShape(_bottom);
-
-		/*
-		state.space().addJoint(new Toodeloo::Wrappers::Chipmunk::Joints::Slide(*_bodies["bottom"], *_bodies["center"], cpv(-1, 0), cpv(-1, 0), 0.0, 1.0));
-		state.space().addJoint(new Toodeloo::Wrappers::Chipmunk::Joints::Slide(*_bodies["bottom"], *_bodies["center"], cpv( 1, 0), cpv( 1, 0), 0.0, 1.0));
-		//state.space().addJoint(new Toodeloo::Wrappers::Chipmunk::Joints::Slide(*_bodies["center"], *_bodies["left_hand"], cpv( 1, 0), cpv( 1, 0), 0.0, 2.0));
-		//state.space().addJoint(new Toodeloo::Wrappers::Chipmunk::Joints::Slide(*_bodies["center"], *_bodies["right_hand"], cpv( 1, 0), cpv( 1, 0), 0.0, 2.0));
-		state.space().addJoint(new Toodeloo::Wrappers::Chipmunk::Joints::Slide(*_bodies["center"], *_bodies["head"], cpv(-1, 0), cpv(-1, 0), 0.0, 1.0));
-		state.space().addJoint(new Toodeloo::Wrappers::Chipmunk::Joints::Slide(*_bodies["center"], *_bodies["head"], cpv( 1, 0), cpv( 1, 0), 0.0, 1.0));
-
-		*/
 
 		typedef std::pair<std::string, Toodeloo::Wrappers::Chipmunk::Body*> BodyPair;
 
@@ -42,24 +32,24 @@ namespace Toodeloo
 	}
 
 	void
-		Player::stop()
-		{
-			_bottom->friction(1.0);
-		}
+	Player::stop()
+	{
+		_bottom->friction(0.0);
+	}
 
 	void
-		Player::goLeft()
-		{
-			_bodies["bottom"]->applyImpulse(cpv(-2000.0, 1.0), cpvzero);
-			_bottom->friction(0.0);
-		}
+	Player::goLeft()
+	{
+		_bodies["bottom"]->applyImpulse(cpv(-2000.0, 1.0), cpvzero);
+		_bottom->friction(0.0);
+	}
 
 	void
-		Player::goRight()
-		{
-			_bodies["bottom"]->applyImpulse(cpv(2000.0, 1.0), cpvzero);
-			_bottom->friction(0.0);
-		}
+	Player::goRight()
+	{
+		_bodies["bottom"]->applyImpulse(cpv(2000.0, 1.0), cpvzero);
+		_bottom->friction(0.0);
+	}
 
 	void Player::jump()
 	{
@@ -68,13 +58,13 @@ namespace Toodeloo
 	}
 
 	void
-		Player::update()
-		{
-		}
+	Player::update()
+	{
+	}
 
 	void
-		Player::draw()
-		{
-		}
+	Player::draw()
+	{
+	}
 }
 
