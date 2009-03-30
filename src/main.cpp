@@ -30,8 +30,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	//std::string state = vm.count("state") ? vm["state"].as<std::string>() : "gameplay";
-
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cerr << "Video initialization failed: " << SDL_GetError() << std::endl;
