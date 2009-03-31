@@ -34,6 +34,8 @@
 
 #include "graphics/image.hpp"
 
+#include "graphics/debug_draw.hpp"
+
 #include "math/vector2.hpp"
 #include "math/vector3.hpp"
 #include "graphics/vertex.hpp"

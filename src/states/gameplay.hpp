@@ -20,7 +20,10 @@ namespace Toodeloo
 				Toodeloo::Camera _camera;
 				Toodeloo::Player _player;
 				Map _map;
-				Toodeloo::Heightmap _heightmap;
+
+				b2AABB _worldAABB;
+				boost::shared_ptr<b2World> _world;
+				Graphics::DebugDraw _debug_draw;
 		};
 	}
 }

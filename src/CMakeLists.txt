@@ -41,6 +41,7 @@ set(SHARED_SOURCES
 	# graphics
 	graphics/image
 	graphics/geometry
+	graphics/debug_draw
 
 	# States
 	states/state
