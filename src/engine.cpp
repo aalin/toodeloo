@@ -154,6 +154,9 @@ namespace Toodeloo
 		if(_states.empty())
 			throw std::runtime_error("No states.");
 
+		while(_last_update == 0)
+			_last_update = SDL_GetTicks();
+
 		unsigned int new_time = SDL_GetTicks();
 
 		_states.top()->update(new_time - _last_update);

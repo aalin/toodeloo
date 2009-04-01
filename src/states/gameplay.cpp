@@ -20,6 +20,19 @@ namespace Toodeloo
 			ground_shape_def.SetAsBox(50.0, 10.0);
 			ground_body->CreateShape(&ground_shape_def);
 
+			b2BodyDef body_def;
+			body_def.position.Set(0.0, 50.0);
+
+			b2Body* body = _world->CreateBody(&body_def);
+
+			b2PolygonDef shape_def;
+			shape_def.SetAsBox(1.0, 1.0);
+			shape_def.density = 1.0;
+			shape_def.friction = 0.3;
+
+			body->CreateShape(&shape_def);
+			body->SetMassFromShapes();
+
 			_debug_draw.SetFlags(
 				b2DebugDraw::e_shapeBit | 
 				b2DebugDraw::e_jointBit | 
@@ -50,7 +63,7 @@ namespace Toodeloo
 			if(keys[SDLK_a]) _camera.strafe(-speed);
 			if(keys[SDLK_d]) _camera.strafe(speed);
 
-			_world->Step(delta / 100.0, 10);
+			_world->Step(1.0/60.0, 10);
 			_world->Validate();
 
 			_camera.update();
