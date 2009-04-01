@@ -12,7 +12,7 @@ namespace Toodeloo
 		{
 			public:
 				Gameplay(Engine&);
-				void update();
+				void update(unsigned int delta);
 				void draw();
 				void handleInput(const SDL_Event&);
 

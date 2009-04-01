@@ -12,7 +12,6 @@ namespace Toodeloo
 			_worldAABB.upperBound.Set(100.0, 100.0);
 			_worldAABB.lowerBound.Set(-100.0, -100.0);
 			_world.reset(new b2World(_worldAABB, b2Vec2(0.0, -10.0), true));
-			_world->SetDebugDraw(&_debug_draw);
 
 			b2BodyDef ground_body_def;
 			ground_body_def.position.Set(0.0, -10.0);
@@ -20,7 +19,6 @@ namespace Toodeloo
 			b2PolygonDef ground_shape_def;
 			ground_shape_def.SetAsBox(50.0, 10.0);
 			ground_body->CreateShape(&ground_shape_def);
-
 
 			_debug_draw.SetFlags(
 				b2DebugDraw::e_shapeBit | 
@@ -34,7 +32,7 @@ namespace Toodeloo
 		}
 
 		void
-		Gameplay::update()
+		Gameplay::update(unsigned int delta)
 		{
 			Uint8* keys = SDL_GetKeyState(NULL);
 			float speed = 3.0;
@@ -52,6 +50,8 @@ namespace Toodeloo
 			if(keys[SDLK_a]) _camera.strafe(-speed);
 			if(keys[SDLK_d]) _camera.strafe(speed);
 
+			_world->Step(delta / 100.0, 10);
+			_world->Validate();
 
 			_camera.update();
 			_player.update();
@@ -95,8 +95,10 @@ namespace Toodeloo
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
 			glPushMatrix();
-			_world->Step(1.0/60.0, 10);
-			_world->Validate();
+
+			_world->SetDebugDraw(&_debug_draw);
+			_world->Step(0, 0);
+			_world->SetDebugDraw(0);
 			//glTranslatef(-_player.position().x, -_player.position().y, 0.0);
 			//_player.draw();
 			glPopMatrix();

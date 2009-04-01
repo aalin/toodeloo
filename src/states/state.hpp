@@ -9,7 +9,7 @@ namespace Toodeloo
 			public:
 				State(Engine&);
 				virtual ~State();
-				virtual void update();
+				virtual void update(unsigned int delta);
 				virtual void draw();
 				virtual void init();
 				virtual void pause();

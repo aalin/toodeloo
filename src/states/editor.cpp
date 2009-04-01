@@ -12,7 +12,7 @@ namespace Toodeloo
 		}
 
 		void
-		Editor::update()
+		Editor::update(unsigned int delta)
 		{
 			Uint8* keys = SDL_GetKeyState(NULL);
 			float speed = 3.0;

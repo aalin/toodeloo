@@ -3,7 +3,7 @@
 namespace Toodeloo
 {
 	Engine::Engine(int width, int height, bool fullscreen)
-		: _width(width), _height(height)
+		: _width(width), _height(height), _last_update(0)
 	{
 		_running = true;
 
@@ -151,18 +151,14 @@ namespace Toodeloo
 	void
 	Engine::update()
 	{
-		/*
-		while(GLenum error = glGetError())
-		{
-			if(error == GL_NO_ERROR)
-				break;
-			//std::cerr << glGetError() << std::endl;
-		}
-		*/
-
 		if(_states.empty())
 			throw std::runtime_error("No states.");
-		_states.top()->update();
+
+		unsigned int new_time = SDL_GetTicks();
+
+		_states.top()->update(new_time - _last_update);
+
+		_last_update = new_time;
 	}
 
 	void

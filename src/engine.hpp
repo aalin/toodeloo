@@ -50,6 +50,8 @@ namespace Toodeloo
 			int _width;
 			int _height;
 			void initGL();
+
+			unsigned int _last_update;
 	};
 }
 

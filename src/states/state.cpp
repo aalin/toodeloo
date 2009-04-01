@@ -12,27 +12,27 @@ namespace Toodeloo
 		{ }
 
 		void
-			State::update()
-			{ }
+		State::update(unsigned int delta)
+		{ }
 
 		void
-			State::draw()
-			{ }
+		State::draw()
+		{ }
 
 		void
-			State::init()
-			{ }
+		State::init()
+		{ }
 
 		void
-			State::pause()
-			{ }
+		State::pause()
+		{ }
 
 		void
-			State::resume()
-			{ }
+		State::resume()
+		{ }
 
 		void
-			State::handleInput(const SDL_Event&)
-			{ }
+		State::handleInput(const SDL_Event&)
+		{ }
 	}
 }
