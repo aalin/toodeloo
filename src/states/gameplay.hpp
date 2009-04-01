@@ -24,6 +24,8 @@ namespace Toodeloo
 				b2AABB _worldAABB;
 				boost::shared_ptr<b2World> _world;
 				Graphics::DebugDraw _debug_draw;
+
+				b2Body* _body;
 		};
 	}
 }

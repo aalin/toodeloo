@@ -23,15 +23,15 @@ namespace Toodeloo
 			b2BodyDef body_def;
 			body_def.position.Set(0.0, 50.0);
 
-			b2Body* body = _world->CreateBody(&body_def);
+			_body = _world->CreateBody(&body_def);
 
 			b2PolygonDef shape_def;
 			shape_def.SetAsBox(1.0, 1.0);
 			shape_def.density = 1.0;
 			shape_def.friction = 0.3;
 
-			body->CreateShape(&shape_def);
-			body->SetMassFromShapes();
+			_body->CreateShape(&shape_def);
+			_body->SetMassFromShapes();
 
 			_debug_draw.SetFlags(
 				b2DebugDraw::e_shapeBit | 
@@ -81,9 +81,11 @@ namespace Toodeloo
 				switch(event.key.keysym.sym)
 				{
 					case SDLK_LEFT:
+						_body->ApplyForce(b2Vec2(-500.0, 0.0), b2Vec2(1.0, 1.0));
 						_player.goLeft();
 						break;
 					case SDLK_RIGHT:
+						_body->ApplyForce(b2Vec2(500.0, 0.0), b2Vec2(1.0, 1.0));
 						_player.goRight();
 						break;
 					case SDLK_UP:
@@ -110,6 +112,7 @@ namespace Toodeloo
 			glPushMatrix();
 
 			_world->SetDebugDraw(&_debug_draw);
+			glLineWidth(1.0);
 			_world->Step(0, 0);
 			_world->SetDebugDraw(0);
 			//glTranslatef(-_player.position().x, -_player.position().y, 0.0);
