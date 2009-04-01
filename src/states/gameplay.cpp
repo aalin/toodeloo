@@ -18,6 +18,7 @@ namespace Toodeloo
 			b2Body* ground_body = _world->CreateBody(&ground_body_def);
 			b2PolygonDef ground_shape_def;
 			ground_shape_def.SetAsBox(50.0, 10.0);
+			ground_shape_def.restitution = 0.0;
 			ground_body->CreateShape(&ground_shape_def);
 
 			b2BodyDef body_def;
@@ -25,10 +26,12 @@ namespace Toodeloo
 
 			_body = _world->CreateBody(&body_def);
 
-			b2PolygonDef shape_def;
-			shape_def.SetAsBox(1.0, 1.0);
+			b2CircleDef shape_def;
+			//shape_def.SetAsBox(1.0, 1.0);
+			shape_def.radius = 5.0;
 			shape_def.density = 1.0;
 			shape_def.friction = 0.3;
+			shape_def.restitution = 0.0;
 
 			_body->CreateShape(&shape_def);
 			_body->SetMassFromShapes();
@@ -81,14 +84,15 @@ namespace Toodeloo
 				switch(event.key.keysym.sym)
 				{
 					case SDLK_LEFT:
-						_body->ApplyForce(b2Vec2(-500.0, 0.0), b2Vec2(1.0, 1.0));
+						_body->ApplyImpulse(b2Vec2(-50.0, 0.0), b2Vec2(0.0, 5.0));
 						_player.goLeft();
 						break;
 					case SDLK_RIGHT:
-						_body->ApplyForce(b2Vec2(500.0, 0.0), b2Vec2(1.0, 1.0));
+						 _body->ApplyImpulse(b2Vec2(50.0, 0.0), b2Vec2(0.0, 5.0));
 						_player.goRight();
 						break;
 					case SDLK_UP:
+						_body->ApplyImpulse(b2Vec2(0.0, 500.0), b2Vec2(0.0, 0.0));
 						_player.jump();
 						break;
 					case SDLK_ESCAPE:
