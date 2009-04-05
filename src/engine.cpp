@@ -28,7 +28,7 @@ namespace Toodeloo
 
 		_surface = SDL_SetVideoMode(width, height, 32, flags);
 		if(_surface == 0)
-			throw std::runtime_error("could init surface");
+			throw std::runtime_error("couldn't init surface");
 
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		//SDL_WM_GrabInput(SDL_GRAB_ON);
