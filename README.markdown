@@ -9,6 +9,11 @@ This is some playing around with Box2D with the goal of creating a platform game
   * [Box2D](http://www.box2d.org/)
   * SDL
 
+## Setup submodules
+
+    git submodule init
+    git submodule update
+
 ## To compile and run:
 
 Follow the instructions in src/box2d/INSTRUCTIONS, and then do:
