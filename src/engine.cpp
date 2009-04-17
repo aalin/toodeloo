@@ -72,6 +72,7 @@ namespace Toodeloo
 		glShadeModel(GL_SMOOTH);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
+		/*
 		glPointSize(3.0);
 
 		glEnable(GL_LINE_SMOOTH);
@@ -94,6 +95,7 @@ namespace Toodeloo
 		glEnable(GL_NORMALIZE);
 
 		glEnable(GL_CULL_FACE);
+		*/
 	}
 
 	void

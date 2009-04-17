@@ -87,6 +87,5 @@ namespace Toodeloo
 	void
 	Map::draw()
 	{
-
 	}
 }

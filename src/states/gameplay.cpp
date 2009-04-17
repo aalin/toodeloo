@@ -107,6 +107,19 @@ namespace Toodeloo
 		void
 		Gameplay::draw()
 		{
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			gluPerspective(30.0, 800/600.0, 0.1, 1000.0);
+
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
+
+			_camera.draw();
+			_map.draw();
+
+			return;
+
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
 			glOrtho(-320.0, 320.0, -240.0, 240.0, -1.0, 1.0);
@@ -114,11 +127,12 @@ namespace Toodeloo
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
 			glPushMatrix();
-
+			/*
 			_world->SetDebugDraw(&_debug_draw);
 			glLineWidth(1.0);
 			_world->Step(0, 0);
 			_world->SetDebugDraw(0);
+			*/
 			//glTranslatef(-_player.position().x, -_player.position().y, 0.0);
 			//_player.draw();
 			glPopMatrix();
