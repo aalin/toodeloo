@@ -15,6 +15,8 @@ namespace Toodeloo
 				virtual void pause();
 				virtual void resume();
 				virtual void handleInput(const SDL_Event&);
+
+				Engine& engine() { return _engine; }
 			protected:
 				Engine& _engine;
 		};

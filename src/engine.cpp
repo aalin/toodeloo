@@ -175,16 +175,4 @@ namespace Toodeloo
 		_states.top()->draw();
 		SDL_GL_SwapBuffers();
 	}
-
-	int
-	Engine::getWidth() const
-	{
-		return _width;
-	}
-
-	int
-	Engine::getHeight() const
-	{
-		return _height;
-	}
 }

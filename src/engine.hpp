@@ -38,8 +38,8 @@ namespace Toodeloo
 			void changeState(boost::shared_ptr<States::State>);
 			void popState();
 
-			int getWidth() const;
-			int getHeight() const;
+			int getWidth() const { return _width; }
+			int getHeight() const { return _height; }
 
 			bool isRunning() const;
 			void quit();

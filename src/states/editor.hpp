@@ -18,6 +18,10 @@ namespace Toodeloo
 			private:
 				Map _map;
 				Math::Vector2 _position;
+				float _zoom;
+
+				std::pair<Math::Vector2, Math::Vector2> box();
+				Math::Vector2 screenToWorld(int x, int y);
 		};
 	}
 }
